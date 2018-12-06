@@ -1,0 +1,15 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+    package="com.yofish.kitmodule">
+
+    <application android:allowBackup="true" android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <activity android:name="com.yofish.kitmodule.base_component.BaseWebActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity android:name="com.yofish.kitmodule.permission.PermissionActivity"
+            android:theme="@style/permission_PermissionActivity"/>
+
+    </application>
+
+</manifest>

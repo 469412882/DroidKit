@@ -1,0 +1,14 @@
+1、侧滑抽屉 NavigationView
+2、提升用户体验的EditText  TextInputLayout
+3、悬浮操作按钮 FloatingActionButton
+4、底部提示   Snackbar
+5、海拔和阴影  View的z值由两部分组成，elevation和translationZ  eleavation是静态的成员，translationZ是用来做动画。
+   在Android L中设置一个阴影很简单，只需要两点：
+   1.设置eleavation值
+   2.添加一个背景或者outline
+6、图片的alpha遮罩  使用android:tint属性给背景调整不同颜色
+7、dialog，使用android.support.v7.app.AlertDialog
+8、checkbox  使用CheckedTextView
+9、edittext  体验更好的edittext  TextInputLayout
+10、水波纹效果  系统有界水波纹?android:attr/selectableItemBackground  系统无界水波纹?android:attr/selectableItemBackgroundBorderless
+               自定义水波纹效果：selector_ripple_bg.xml          selector_ripple_bg_border_less.xml

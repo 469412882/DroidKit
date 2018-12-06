@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/root"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:clickable="true">
+
+    <TextView
+        android:id="@+id/neterror"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:drawablePadding="20dp"
+        android:drawableTop="@mipmap/neterror"
+        android:gravity="center"
+        android:text="网络不给力 点击刷新^_^"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/nodata"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:drawablePadding="20dp"
+        android:drawableTop="@mipmap/nodata"
+        android:gravity="center"
+        android:text="空空如也^_^"
+        android:visibility="gone" />
+
+</LinearLayout>

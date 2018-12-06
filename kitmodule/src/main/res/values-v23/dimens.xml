@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- toolbar -->
+    <dimen name="common_toolbar_height">70dp</dimen>
+    <dimen name="common_toolbar_padding_top">25dp</dimen>
+</resources>

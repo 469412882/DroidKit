@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yofish.droidkit.activity.MainActivity">
+
+    <Button
+        android:id="@+id/network"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="网络请求页面"/>
+
+    <Button
+        android:id="@+id/imgloader"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="图片加载页面"
+        app:layout_constraintTop_toBottomOf="@+id/network"/>
+
+    <Button
+        android:id="@+id/webview"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="webview页面"
+        app:layout_constraintTop_toBottomOf="@+id/imgloader"/>
+
+    <Button
+        android:id="@+id/permission"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="权限管理"
+        app:layout_constraintTop_toBottomOf="@+id/webview"/>
+
+    <Button
+        android:id="@+id/ui"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="常用UI"
+        app:layout_constraintTop_toBottomOf="@+id/permission"/>
+
+    <Button
+        android:id="@+id/router"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="路由跳转"
+        app:layout_constraintTop_toBottomOf="@+id/ui"/>
+
+    <Button
+        android:id="@+id/video"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="视频播放"
+        app:layout_constraintTop_toBottomOf="@+id/router"/>
+
+</android.support.constraint.ConstraintLayout>

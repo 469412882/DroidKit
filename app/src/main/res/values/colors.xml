@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 应用底部tab颜色 -->
+    <color name="mainTabDefColor">#999999</color>
+    <color name="mainTabFoucesColor">#00afff</color>
+    <!-- 应用的主要色调，actionBar默认使用该颜色 -->
+    <color name="colorPrimary">#3F51B5</color>
+    <!-- 应用的主要暗色调，statusBarColor默认使用该颜色 -->
+    <color name="colorPrimaryDark">#303F9F</color>
+    <!-- 一般控件的选种效果默认采用该颜色,如progressBar的进度颜色、dialog的按钮颜色、checkbox的选中背景色 -->
+    <color name="colorAccent">#FF4081</color>
+    <!--  -->
+    <color name="colorMenuItemText">#363636</color>
+    <!--  -->
+    <color name="colorToolbarPrimary">#FFFFFF</color>
+    <!--  -->
+    <color name="material_grey">#ff424242</color>
+    <!-- 状态栏颜色，默认使用colorPrimaryDark -->
+    <color name="statusBarColor">#303F9F</color>
+    <!-- 窗口背景颜色 -->
+    <color name="windowBackground">#ff009688</color>
+    <!-- 底部栏颜色 -->
+    <color name="navigationBarColor">#ff009688</color>
+    <!-- 应用的前景色，ListView的分割线，switch滑动区默认使用该颜色 -->
+    <color name="colorForeground">#ff009688</color>
+    <!-- 应用的背景色，popMenu的背景默认使用该颜色 -->
+    <color name="colorBackground">#ff009688</color>
+    <!-- 控件的默认色调 -->
+    <color name="colorControlNormal">#ff009688</color>
+    <!-- 控件按压时的色调 -->
+    <color name="colorControlHighlight">#ff009688</color>
+    <!-- 控件选中时的颜色，默认使用colorAccent -->
+    <color name="colorControlActivated">#ff009688</color>
+    <!-- 默认按钮的背景颜色 -->
+    <color name="colorButtonNormal">#ff009688</color>
+    <!-- Button，textView的文字颜色 -->
+    <color name="textColor">#ff009688</color>
+    <!-- RadioButton checkbox等控件的文字 -->
+    <color name="textColorPrimaryDisableOnly">#ff009688</color>
+    <!-- 应用的主要文字颜色，actionBar的标题文字默认使用该颜色 -->
+    <color name="textColorPrimary">#ff009688</color>
+    <!-- divider color -->
+    <color name="colorDivider">#ffe0e0e0</color>
+    <!-- 水波纹 color -->
+    <color name="colorRipple">#C3C3C3</color>
+</resources>

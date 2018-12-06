@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/droidkit_toolbar" />
+
+        <ImageButton
+            android:id="@+id/close"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginLeft="?attr/actionBarSize"
+            android:src="@mipmap/ic_close_white"
+            android:background="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_toRightOf="@id/close"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/text_size_toolbar_title"
+            android:textColor="@color/colorToolbarPrimary"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.yofish.kitmodule.wedget.webview.X5WebView
+            android:id="@+id/base_webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:background="@drawable/color_progressbar"
+            android:max="100"
+            android:layout_height="2dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

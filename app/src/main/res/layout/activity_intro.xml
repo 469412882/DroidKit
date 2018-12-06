@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/intro_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+        
+    <LinearLayout
+        android:id="@+id/intro_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/intro_image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:src="@drawable/intro_loading_page" />
+
+        <RelativeLayout
+            android:id="@+id/bannerbottom"
+            android:layout_width="match_parent"
+            android:layout_height="94dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@mipmap/ic_launcher"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textColor="@color/colorTextTitle"
+                    android:textSize="24sp"
+                    android:layout_marginLeft="12dp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/intro_skip"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="50dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/skip_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/circle_alpha_black_shape"
+            android:gravity="center"
+            android:text="跳过"
+            android:layout_margin="1dp"
+            android:textColor="@android:color/white"
+            android:textSize="11sp" />
+
+        <com.yofish.kitmodule.wedget.CustomProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:annulusColor="@android:color/transparent"
+            app:annulusWidth="1dp"
+            app:pbarColor="#F56B5C"
+            app:pbarWidth="1dp"
+            app:pshowText="false"
+            app:strokeWidth="0dp" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/intro_experience_now"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/round_primary_stroke_bg"
+        android:gravity="center"
+        android:text="立即体验"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/intro_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="18dp"
+        android:visibility="gone">
+
+        <include
+            layout="@layout/intropage_bottom_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</RelativeLayout>

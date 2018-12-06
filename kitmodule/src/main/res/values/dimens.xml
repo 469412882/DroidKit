@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dot_radius">3dp</dimen>
+    <dimen name="text_size_toolbar_title">20sp</dimen>
+    <!-- toolbar -->
+    <dimen name="common_toolbar_height">45dp</dimen>
+    <dimen name="common_toolbar_height_constant">45dp</dimen>
+    <dimen name="common_toolbar_padding_top">0dp</dimen>
+    <!-- 文字大小 -->
+    <dimen name="common_txt_small_size">12sp</dimen>
+    <dimen name="common_txt_normal_size">14sp</dimen>
+    <dimen name="common_txt_title_size">16sp</dimen>
+    <dimen name="common_txt_big_title_size">24sp</dimen>
+    <dimen name="common_txt_large_1">34sp</dimen>
+    <dimen name="common_txt_large_2">45sp</dimen>
+    <dimen name="common_txt_large_3">56sp</dimen>
+    <dimen name="common_txt_large_4">112sp</dimen>
+    <!-- 间距 -->
+    <dimen name="common_status_bar_height">24dp</dimen>
+    <dimen name="common_app_bar_height">56dp</dimen>
+    <dimen name="common_bottom_nav_height">48dp</dimen>
+    <dimen name="common_float_btn_edge_1">40dp</dimen>
+    <dimen name="common_float_btn_edge_2">56dp</dimen>
+    <dimen name="common_avatar_edge_1">40dp</dimen>
+    <dimen name="common_avatar_edge_2">64dp</dimen>
+    <dimen name="common_min_clickable_edge">48dp</dimen>
+    <dimen name="common_card_gap">8dp</dimen>
+    <!-- 分割线上下留白 -->
+    <dimen name="common_divider_margin">8dp</dimen>
+    <dimen name="common_margin">16dp</dimen>
+    <dimen name="common_txt_left_margin">72dp</dimen>
+    <dimen name="common_dialog_margin">24dp</dimen>
+
+    <dimen name="divider_height">1dp</dimen>
+
+</resources>
