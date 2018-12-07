@@ -96,6 +96,8 @@
         <activity
             android:name="com.yofish.droidkit.activity.VideoActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.AlipayActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

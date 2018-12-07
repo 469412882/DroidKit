@@ -54,4 +54,11 @@
         android:text="视频播放"
         app:layout_constraintTop_toBottomOf="@+id/router"/>
 
+    <Button
+        android:id="@+id/alipay"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="支付宝集成"
+        app:layout_constraintTop_toBottomOf="@+id/router"/>
+
 </android.support.constraint.ConstraintLayout>

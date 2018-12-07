@@ -57,6 +57,7 @@ public abstract class ProgressSubscriber<T> extends BaseSubscriber<T> {
             return;
         }
         dialog = new ProgressDialog(mContext);
+        dialog.setTitle("加载中，请稍后...");
         dialog.setCancelable(cancleable);
     }
 }

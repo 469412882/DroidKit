@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.trello.rxlifecycle.android.ActivityEvent;
 import com.yofish.netmodule.callback.ICallBack;
+import com.yofish.netmodule.datatype.StandardData;
 import com.yofish.netmodule.download.DownloadInfo;
 import com.yofish.netmodule.retrofit.Interceptor.HeaderInterceptor;
 import com.yofish.netmodule.retrofit.api.ApiService;
@@ -16,7 +17,6 @@ import com.yofish.netmodule.retrofit.subscriber.DownloadSubscriber;
 import com.yofish.netmodule.retrofit.subscriber.ProgressSubscriber;
 import com.yofish.netmodule.retrofit.subscriber.UploadSubscriber;
 import com.yofish.netmodule.retrofit.subscriber.upload.ProgressRequestBody;
-import com.yofish.netmodule.utils.Utility;
 
 import java.io.File;
 import java.util.HashMap;
@@ -37,12 +37,14 @@ import rx.schedulers.Schedulers;
 
 /**
  * retrofit请求
- *
+ * <p>
  * Created by hch on 2017/6/28.
  */
 
 public class RetrofitRequestStrategy extends BaseRequestStrategy {
-    /** 接口 */
+    /**
+     * 接口
+     */
     private ApiService apiService;
 
     @Override
@@ -146,8 +148,8 @@ public class RetrofitRequestStrategy extends BaseRequestStrategy {
         HttpDownloadManager.getInstance().startDownload(config, subscriber);
     }
 
-    public ProgressSubscriber generatorSubscriber(final ICallBack callBack) {
-        ProgressSubscriber<String> subscriber = new ProgressSubscriber<String>() {
+    private ProgressSubscriber generatorSubscriber(final ICallBack callBack) {
+        return new ProgressSubscriber<String>() {
 
             @Override
             public void onStart() {
@@ -165,7 +167,7 @@ public class RetrofitRequestStrategy extends BaseRequestStrategy {
             public void onNext(String data) {
                 Log.d("requestData", "请求列表数据完成");
                 try {
-                    callBack.onSuccess(Utility.parseDataByType(data, callBack.getClass()));
+                    StandardData.successData(callBack, data);
                 } catch (Exception e) {
                     e.printStackTrace();
                     onError(e);
@@ -179,11 +181,10 @@ public class RetrofitRequestStrategy extends BaseRequestStrategy {
                 onCompleted();
             }
         };
-        return subscriber;
     }
 
-    public BaseSubscriber generatorBaseSubscriber(final ICallBack callBack) {
-        BaseSubscriber subscriber = new BaseSubscriber() {
+    private BaseSubscriber generatorBaseSubscriber(final ICallBack callBack) {
+        return new BaseSubscriber<String>() {
 
             @Override
             public void onStart() {
@@ -198,9 +199,9 @@ public class RetrofitRequestStrategy extends BaseRequestStrategy {
             }
 
             @Override
-            public void onNext(Object data) {
+            public void onNext(String data) {
                 try {
-                    callBack.onSuccess(data);
+                    StandardData.successData(callBack, data);
                 } catch (Exception e) {
                     e.printStackTrace();
                     onError(e);
@@ -214,11 +215,10 @@ public class RetrofitRequestStrategy extends BaseRequestStrategy {
                 onCompleted();
             }
         };
-        return subscriber;
     }
 
-    public UploadSubscriber generatorUploadSubscriber(final ICallBack callBack) {
-        UploadSubscriber subscriber = new UploadSubscriber() {
+    private UploadSubscriber generatorUploadSubscriber(final ICallBack callBack) {
+        return new UploadSubscriber<String>() {
 
             @Override
             public void onStart() {
@@ -245,15 +245,14 @@ public class RetrofitRequestStrategy extends BaseRequestStrategy {
             }
 
             @Override
-            public void onNext(Object o) {
-                callBack.onSuccess(o);
+            public void onNext(String data) {
+                StandardData.successData(callBack, data);
             }
         };
-        return subscriber;
     }
 
-    public DownloadSubscriber generatorDownloadSubscriber(final ICallBack callBack) {
-        DownloadSubscriber<DownloadInfo> subscriber = new DownloadSubscriber<DownloadInfo>() {
+    private DownloadSubscriber generatorDownloadSubscriber(final ICallBack callBack) {
+        return new DownloadSubscriber<DownloadInfo>() {
 
             @Override
             public void onStart() {
@@ -307,14 +306,12 @@ public class RetrofitRequestStrategy extends BaseRequestStrategy {
                 }
             }
         };
-        return subscriber;
     }
 
     /**
      * retrofit
      *
-     * @param config
-     *            config
+     * @param config config
      * @return Retrofit
      */
     private Retrofit getRetrofit(RequestConfig config) {
@@ -322,15 +319,14 @@ public class RetrofitRequestStrategy extends BaseRequestStrategy {
                 .connectTimeout(config.getTimeout(), TimeUnit.SECONDS)
                 .readTimeout(config.getTimeout(), TimeUnit.SECONDS).writeTimeout(config.getTimeout(), TimeUnit.SECONDS)
                 .build();
-        Retrofit retrofit = new Retrofit.Builder().client(httpClient).baseUrl(config.getBaseUrl())
+        return new Retrofit.Builder().client(httpClient).baseUrl(config.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
-        return retrofit;
     }
 
     /**
      * 日志输出 自行判定是否添加
-     * 
+     *
      * @return
      */
     private HttpLoggingInterceptor getHttpLoggingInterceptor() {

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yofish.droidkit.activity.AlipayActivity;
 import com.yofish.kitmodule.base_component.BaseFragment;
 import com.yofish.kitmodule.router.CommonRouter;
 import com.yofish.droidkit.R;
@@ -35,6 +36,7 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.ui).setOnClickListener(this);
         rootView.findViewById(R.id.router).setOnClickListener(this);
         rootView.findViewById(R.id.video).setOnClickListener(this);
+        rootView.findViewById(R.id.alipay).setOnClickListener(this);
     }
 
     @Override
@@ -67,6 +69,10 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.video:
                 intent.setClass(getContext(), VideoActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.alipay:
+                intent.setClass(getContext(), AlipayActivity.class);
                 startActivity(intent);
                 break;
         }
