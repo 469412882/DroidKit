@@ -3,6 +3,7 @@ package com.yofish.kitmodule.router;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.yofish.kitmodule.util.LogUtils;
@@ -51,6 +52,20 @@ public class CommonRouter {
 
     public static void router2PagerByUrl(Context context, String path, Bundle bundle){
         ARouter.getInstance().build(path).with(bundle).navigation(context);
+    }
+
+    /**
+     * 获取注册路由的Fragment实例
+     * @param routerUrl
+     * @return
+     */
+    public static Fragment getRouterFragment(String routerUrl) {
+        try {
+            return (Fragment)ARouter.getInstance().build(routerUrl).navigation();
+        } catch (Exception var2) {
+            LogUtils.i( "no page exception");
+            return null;
+        }
     }
 
 }

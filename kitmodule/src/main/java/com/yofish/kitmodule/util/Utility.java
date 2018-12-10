@@ -1,6 +1,10 @@
 package com.yofish.kitmodule.util;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -9,11 +13,16 @@ import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.ColorInt;
+import android.support.v4.content.FileProvider;
 import android.support.v4.graphics.ColorUtils;
+import android.text.ClipboardManager;
 import android.text.TextUtils;
 import android.util.TypedValue;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -30,7 +39,11 @@ import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
+
+import static android.content.Context.CLIPBOARD_SERVICE;
 
 
 /**
@@ -38,7 +51,9 @@ import java.util.Set;
  */
 
 public class Utility {
-
+    public static Pattern idNumPattern = Pattern.compile("^[1-9][0-7]\\d{4}((19\\d{2}(0[13-9]|1[012])(0[1-9]|[12]\\d|30))|(19\\d{2}(0[13578]|1[02])31)|(19\\d{2}02(0[1-9]|1\\d|2[0-8]))|(19([13579][26]|[2468][048]|0[48])0229))\\d{3}(\\d|X|x)?$");
+    public static String[] ID_JIAO_YAN = new String[]{"1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"};
+    public static int[] ID_XI_SHU = new int[]{7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2};
 
     public static File saveFile(InputStream inputStream, String fileName) {
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -249,7 +264,7 @@ public class Utility {
      * @param context context
      * @return String
      */
-    public static String getVersion(Context context) {
+    public static String getVersionName(Context context) {
         try {
             return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException e) {
@@ -388,19 +403,138 @@ public class Utility {
         return ColorUtils.calculateLuminance(color) >= 0.5D;
     }
 
+
+
     /**
-     * 读取客户端version
-     *
+     *  粘贴板
+     * @param content
      * @param context
-     *            context
-     * @return 客户端version
      */
-    public static String getVersionName(Context context) {
+    public static void copyToClipboard(String content, Context context) {
         try {
-            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return "";
+            if(Build.VERSION.SDK_INT <= 11) {
+                ClipboardManager var2 = (ClipboardManager)context.getApplicationContext().getSystemService(CLIPBOARD_SERVICE);
+                if(var2 != null) {
+                    var2.setText(content);
+                    Toast.makeText(context, "复制成功", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                android.content.ClipboardManager var4 = (android.content.ClipboardManager)context.getApplicationContext().getSystemService(CLIPBOARD_SERVICE);
+                if(var4 != null) {
+                    var4.setText(content);
+                    Toast.makeText(context, "复制成功", Toast.LENGTH_SHORT).show();
+                }
+            }
+        } catch (Exception var3) {
+            LogUtils.e( var3.toString());
+        }
+
+    }
+
+    /**
+     * 获取剪切板内容
+     * @param context
+     * @return
+     */
+    public static String getClipBoardContent(Context context) {
+        try {
+            if(Build.VERSION.SDK_INT <= 11) {
+                ClipboardManager var3 = (ClipboardManager)context.getApplicationContext().getSystemService(CLIPBOARD_SERVICE);
+                return var3.getText().toString();
+            } else {
+                android.content.ClipboardManager var1 = (android.content.ClipboardManager)context.getApplicationContext().getSystemService(CLIPBOARD_SERVICE);
+                return var1 != null?var1.getText().toString():null;
+            }
+        } catch (Exception var2) {
+            LogUtils.e(var2.toString());
+            return null;
         }
     }
+
+    /**
+     * 打电话
+     * @param context
+     * @param phoneNum
+     */
+    public static void makeCall(Context context, String phoneNum) {
+        try {
+            Intent var2 = new Intent("android.intent.action.DIAL", Uri.parse("tel:" + phoneNum));
+            var2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(var2);
+        } catch (ActivityNotFoundException var3) {
+            Toast.makeText(context, "抱歉，未找到打电话的应用", Toast.LENGTH_SHORT).show();
+        } catch (Exception var4) {
+            ;
+        }
+
+    }
+
+    /**
+     * 发短信
+     * @param context
+     * @param phoneNum
+     * @param msg
+     */
+    public static void makeMsg(Context context, String phoneNum, String msg) {
+        try {
+            Uri var3 = Uri.parse("smsto:" + phoneNum);
+            Intent var4 = new Intent("android.intent.action.SENDTO", var3);
+            var4.putExtra("sms_body", msg);
+            var4.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(var4);
+        } catch (ActivityNotFoundException var5) {
+            Toast.makeText(context, "抱歉，未找到短信应用", Toast.LENGTH_SHORT).show();
+        } catch (Exception var6) {
+            ;
+        }
+
+    }
+
+    /**
+     * 校验身份证号
+     * @param context
+     * @param idNum
+     * @return
+     */
+    public static boolean checkIDcard(Context context, String idNum) {
+        boolean var2 = idNumPattern.matcher(idNum).matches();
+        if(!var2) {
+            return false;
+        } else if(idNum.length() < 18) {
+            Toast.makeText(context, "请输入正确的二代身份证号码", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            char[] var3 = idNum.toCharArray();
+            int var4 = 0;
+
+            int var5;
+            for(var5 = 0; var5 < var3.length - 1; ++var5) {
+                var4 += Integer.parseInt(var3[var5] + "") * ID_XI_SHU[var5];
+            }
+
+            var5 = var4 % 11;
+            String var6 = ID_JIAO_YAN[var5];
+            String var7 = var3[var3.length - 1] + "";
+            if(var6.toUpperCase().equals(var7.toUpperCase())) {
+                var2 = true;
+            } else {
+                var2 = false;
+            }
+
+            return var2;
+        }
+    }
+
+    /**
+     * 判断集合是否为空
+     * @param list
+     * @return
+     */
+    public static boolean isNotEmptyList(List list) {
+        return list != null && list.size() > 0;
+    }
+
+
+
+
 }
