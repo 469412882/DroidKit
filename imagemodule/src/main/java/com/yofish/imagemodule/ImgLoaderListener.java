@@ -11,7 +11,7 @@ public interface ImgLoaderListener {
 
     void finish();
 
-    void progress(int progress);
+    void progress(boolean isComplete, int percentage, long bytesRead, long totalBytes);
 
     void failed();
 }

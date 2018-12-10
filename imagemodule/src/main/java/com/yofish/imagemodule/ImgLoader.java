@@ -1,7 +1,14 @@
 package com.yofish.imagemodule;
 
 import android.content.Context;
+import android.net.Uri;
 import android.widget.ImageView;
+
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+import com.bumptech.glide.request.RequestOptions;
+import com.yofish.imagemodule.strategy.IImgLoaderStrategy;
+
+import java.io.File;
 
 /**
  * 图片加载
@@ -40,10 +47,18 @@ public class ImgLoader {
      * 加载图片
      * 
      * @param options
-     *            图片配置选项
+     * 图片配置选项
      */
     public void load(ImgOptions options) {
         ImgLoaderDelegate.getInstance().getLoader().loadImg(options);
+    }
+
+    /**
+     * 加载图片 带有进度回调
+     * @param options
+     */
+    public void loadWithListener(ImgOptions options) {
+        ImgLoaderDelegate.getInstance().getLoader().loadImgWithProgress(options);
     }
 
     /**
@@ -56,6 +71,29 @@ public class ImgLoader {
      */
     public void load(String url, ImageView imageView) {
         ImgLoaderDelegate.getInstance().getLoader().loadImg(new ImgOptions(url, imageView));
+    }
+
+    /**
+     * 加载图片 带有进度回调
+     * @param url
+     * @param imageView
+     */
+    public void loadWithListener(String url, ImageView imageView) {
+        ImgLoaderDelegate.getInstance().getLoader().loadImgWithProgress(new ImgOptions(url, imageView));
+    }
+
+    /**
+     * 暂停加载
+     */
+    public void pauseRequests(Context context) {
+        ImgLoaderDelegate.getInstance().getLoader().pauseRequests(context);
+    }
+
+    /**
+     * 恢复加载
+     */
+    public void resumeRequests(Context context) {
+        ImgLoaderDelegate.getInstance().getLoader().resumeRequests(context);
     }
 
     /**
@@ -89,6 +127,14 @@ public class ImgLoader {
         return ImgLoaderDelegate.getInstance().getLoader().getCacheSize(context);
     }
 
+    /**
+     * 设置使用某种加载器加载图片 默认Glide加载
+     * @param iImgLoaderStrategy
+     */
+    public void setImgLoader(IImgLoaderStrategy iImgLoaderStrategy) {
+        ImgLoaderDelegate.getInstance().setLoader(iImgLoaderStrategy);
+    }
+
     public static class Builder {
 
         ImgOptions options;
@@ -102,23 +148,73 @@ public class ImgLoader {
             return this;
         }
 
-        public Builder placeHolder(int placeHolder) {
-            options.setPlaceHolder(placeHolder);
-            return this;
-        }
-
         public Builder path(String path) {
             options.setPath(path);
             return this;
         }
 
+        public Builder uri(Uri uri) {
+            options.setUri(uri);
+            return this;
+        }
+
+        public Builder file(File file) {
+            options.setFile(file);
+            return this;
+        }
+
+        public Builder imgByte(byte[] imgByte) {
+            options.setImgByte(imgByte);
+            return this;
+        }
+
+        public Builder resourceId(int resourceId) {
+            options.setResourceId(resourceId);
+            return this;
+        }
+
+        public Builder placeHolder(int placeHolder) {
+            options.setPlaceHolder(placeHolder);
+            return this;
+        }
+
+        public Builder error(int error) {
+            options.setError(error);
+            return this;
+        }
+
+        public Builder bitmapTransformation(BitmapTransformation bitmapTransformation) {
+            options.setBitmapTransformation(bitmapTransformation);
+            return this;
+        }
+
+        /**
+         * 图片裁剪类型
+         * @param type
+         * @return
+         */
         public Builder imgType(ImgOptions.ImgType type) {
             options.setType(type);
             return this;
         }
 
+        /**
+         * 加载某种图片 默认加载网络图片
+         * @param loadType
+         * @return
+         */
+        public Builder loadType(ImgOptions.LoadType loadType) {
+            options.setLoadType(loadType);
+            return this;
+        }
+
         public Builder radius(int radius) {
             options.setRadius(radius);
+            return this;
+        }
+
+        public Builder requestOptions(RequestOptions requestOptions) {
+            options.setRequestOptions(requestOptions);
             return this;
         }
 
@@ -130,6 +226,11 @@ public class ImgLoader {
         public void into(ImageView imageView) {
             options.setImageView(imageView);
             getInstance().load(options);
+        }
+
+        public void intoWithListener(ImageView imageView) {
+            options.setImageView(imageView);
+            getInstance().loadWithListener(options);
         }
 
     }

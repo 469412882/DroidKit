@@ -27,6 +27,10 @@ public interface IImgLoaderStrategy {
 
     void loadGifWithProgress(ImgOptions options);
 
+    void resumeRequests(Context context);
+
+    void pauseRequests(Context context);
+
     void clearImgDiskCache(Context context);
 
     void clearImgMemoryCache(Context context);

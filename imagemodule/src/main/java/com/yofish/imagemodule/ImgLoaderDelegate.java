@@ -11,8 +11,14 @@ import com.yofish.imagemodule.strategy.IImgLoaderStrategy;
  */
 
 public class ImgLoaderDelegate {
-    private ImgLoaderDelegate() {
 
+    private IImgLoaderStrategy iImgLoaderStrategy;
+
+    /**
+     * 默认使用Glide策略加载图片
+     */
+    private ImgLoaderDelegate() {
+        iImgLoaderStrategy = getGlideStrategy();
     }
 
     public static ImgLoaderDelegate getInstance() {
@@ -33,10 +39,14 @@ public class ImgLoaderDelegate {
     }
 
     public IImgLoaderStrategy getLoader() {
-        return getGlideStrategy();
+        return iImgLoaderStrategy;
     }
 
-    private GlideStrategy getGlideStrategy() {
+    public void setLoader(IImgLoaderStrategy iImgLoaderStrategy) {
+        this.iImgLoaderStrategy = iImgLoaderStrategy;
+    }
+
+    public GlideStrategy getGlideStrategy() {
         return GlideStrategy.getInstance();
     }
 }

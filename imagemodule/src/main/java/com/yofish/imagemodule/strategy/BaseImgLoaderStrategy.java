@@ -1,5 +1,10 @@
 package com.yofish.imagemodule.strategy;
 
+
+import android.content.Context;
+
+import com.yofish.imagemodule.ImgOptions;
+
 /**
  * 图片加载基类
  *
@@ -7,4 +12,45 @@ package com.yofish.imagemodule.strategy;
  */
 
 public abstract class BaseImgLoaderStrategy implements IImgLoaderStrategy {
+
+    @Override
+    public void resumeRequests(Context context) {
+
+    }
+
+    @Override
+    public void pauseRequests(Context context) {
+
+    }
+
+    @Override
+    public void loadImgWithPlaceHolder(ImgOptions options) {
+
+    }
+
+    @Override
+    public void loadRoundImg(ImgOptions options) {
+
+    }
+
+    @Override
+    public void loadGif(ImgOptions options) {
+
+    }
+
+    @Override
+    public void loadImgLocal(ImgOptions options) {
+
+    }
+
+    @Override
+    public void loadImgWithProgress(ImgOptions options) {
+
+    }
+
+    @Override
+    public void loadGifWithProgress(ImgOptions options) {
+
+    }
+
 }

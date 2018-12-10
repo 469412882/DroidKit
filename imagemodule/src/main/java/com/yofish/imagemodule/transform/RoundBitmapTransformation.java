@@ -33,6 +33,10 @@ public class RoundBitmapTransformation extends BitmapTransformation {
         this.radius = Resources.getSystem().getDisplayMetrics().density * radius;
     }
 
+    public void setRadius(int radius) {
+        this.radius = Resources.getSystem().getDisplayMetrics().density * radius;
+    }
+
     @Override
     protected Bitmap transform(@NonNull BitmapPool pool, @NonNull Bitmap toTransform, int outWidth, int outHeight) {
         return roundCrop(pool, toTransform);
@@ -45,9 +49,9 @@ public class RoundBitmapTransformation extends BitmapTransformation {
 
     private Bitmap roundCrop(BitmapPool pool, Bitmap source){
         if (source == null) return null;
-        Bitmap result = pool.get(source.getWidth(), source.getHeight(), Bitmap.Config.RGB_565);
+        Bitmap result = pool.get(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
         if (result == null) {
-            result = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.RGB_565);
+            result = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
         }
         Canvas canvas = new Canvas(result);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
