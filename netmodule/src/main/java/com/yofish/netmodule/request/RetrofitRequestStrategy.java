@@ -3,6 +3,8 @@ package com.yofish.netmodule.request;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
 import com.trello.rxlifecycle.android.ActivityEvent;
 import com.yofish.netmodule.callback.ICallBack;
 import com.yofish.netmodule.datatype.StandardData;
@@ -66,13 +68,22 @@ public class RetrofitRequestStrategy extends BaseRequestStrategy {
         super.excutePost(config);
         BaseSubscriber subscriber = generatorSubscriber(config.getCallBack());
         apiService = getRetrofit(config).create(ApiService.class);
+        String content = config.getParameters() != null ? JSON.toJSONString(config.getParameters()): "";
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), content);
         apiService
-                .excutePost(config.getMethod(), config.getParameters())
+                .excutePost(config.getMethod(), body)
                 .retryWhen(new RetryWhenNetworkException(config.getRetryTime(), config.getRetryDelay()))
                 .compose(
                         new RxActivityTransformer<ResponseBody>(config.getRxAppCompatActivity(), ActivityEvent.DESTROY))
                 .subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).map(subscriber.getRxDataMap())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
+        /*apiService
+                .excutePost(config.getMethod(), config.getParameters())
+                .retryWhen(new RetryWhenNetworkException(config.getRetryTime(), config.getRetryDelay()))
+                .compose(
+                        new RxActivityTransformer<ResponseBody>(config.getRxAppCompatActivity(), ActivityEvent.DESTROY))
+                .subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).map(subscriber.getRxDataMap())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);*/
     }
 
     @Override
@@ -127,8 +138,8 @@ public class RetrofitRequestStrategy extends BaseRequestStrategy {
             bodys.put(key + "\"; filename=\"" + file.getName(), requestBody);
         }
         if (config.getParameters() != null) {
-            for (Map.Entry<String, String> entry : config.getParameters().entrySet()) {
-                bodys.put(entry.getKey(), RequestBody.create(null, entry.getValue()));
+            for (Map.Entry<String, Object> entry : config.getParameters().entrySet()) {
+                bodys.put(entry.getKey(), RequestBody.create(null, String.valueOf(entry.getValue())));
             }
         }
         BaseSubscriber subscriber = generatorBaseSubscriber(config.getCallBack());

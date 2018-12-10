@@ -15,6 +15,7 @@ import android.support.v4.graphics.ColorUtils;
 import android.text.TextUtils;
 import android.util.TypedValue;
 
+import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -53,7 +54,9 @@ public class Utility {
         if (t instanceof Class) {
             t = clazz.getSuperclass().getGenericSuperclass();
         }
-
+        if (!(t instanceof ParameterizedType)) {
+            return null;
+        }
         ParameterizedType parameterized = (ParameterizedType) t;
         return $Gson$Types.canonicalize(parameterized.getActualTypeArguments()[0]);
     }
@@ -70,9 +73,8 @@ public class Utility {
         if (type == null) {
             return data;
         }
-        Gson gson = new Gson();
         try {
-            Object o = gson.fromJson(data, type);
+            Object o = JSON.parseObject(data, type);
             return o;
         } catch (Exception e) {
             return data;

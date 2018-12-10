@@ -330,7 +330,7 @@ public class IntroActivity extends BaseActivity implements View.OnClickListener 
      * 取开屏广告信息
      */
     private void loadBannerInfo() {
-        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, Object> params = new HashMap<>();
         params.put("iterativeVersionCode", "20");
         NetClient.newBuilder(this).baseUrl("http://creditv2.youyuwo.com/notcontrol/enjoy/v2/")
                 .method("start.go").params(params).callBack(new BaseCallBack<BannerRouterBean>() {

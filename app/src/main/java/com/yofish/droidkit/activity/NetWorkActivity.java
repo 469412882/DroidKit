@@ -127,7 +127,7 @@ public class NetWorkActivity extends BaseActivity implements View.OnClickListene
             InputStream inputStream2 = getResources().getAssets().open("pic2.png");
             File file = Utility.saveFile(inputStream, "pic.png");
             File file2 = Utility.saveFile(inputStream2, "pic2.png");
-            Map<String, String> params = new HashMap<>();
+            Map<String, Object> params = new HashMap<>();
             params.put("username", "huach");
             new NetClient.Builder(this).baseUrl("http://credit.youyuwo.com/control/user/").method("uploadIconNew.go")
                     .addFile(file).addFile(file2).params(params).callBack(new ProgressCallBack() {

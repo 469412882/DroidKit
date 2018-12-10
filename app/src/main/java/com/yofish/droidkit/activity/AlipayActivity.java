@@ -6,15 +6,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.Gson;
 import com.yofish.droidkit.R;
+import com.yofish.droidkit.bean.BankInfoBean;
+import com.yofish.droidkit.bean.MainConfigData;
 import com.yofish.droidkit.bean.PayResult;
 import com.yofish.kitmodule.base_component.BaseActivity;
 import com.yofish.kitmodule.util.LogUtils;
@@ -43,19 +44,23 @@ public class AlipayActivity extends BaseActivity implements View.OnClickListener
             switch (msg.what) {
                 case SDK_PAY_FLAG: {
                     @SuppressWarnings("unchecked")
-                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
+                    Map<String, String> map = (Map<String, String>) msg.obj;
+                    PayResult payResult = new PayResult();
+                    payResult.setResultStatus(map.get("resultStatus"));
+                    payResult.setMemo(map.get("memo"));
+                    payResult.setResult(JSON.parseObject(map.get("result"), PayResult.ResultBean.class));
                     /**
                      * 对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
                      */
-                    String resultInfo = payResult.getResult();// 同步返回需要验证的信息
                     String resultStatus = payResult.getResultStatus();
                     // 判断resultStatus 为9000则代表支付成功
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-                        mPayResult.setText("支付成功" + payResult);
+                        mPayResult.setText("支付成功" + JSON.toJSONString(payResult));
+                        doSync(payResult);
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
-                        mPayResult.setText("支付失败" + payResult);
+                        mPayResult.setText("支付失败" + JSON.toJSONString(payResult));
                     }
                     break;
                 }
@@ -63,8 +68,6 @@ public class AlipayActivity extends BaseActivity implements View.OnClickListener
                     break;
             }
         }
-
-        ;
     };
 
     @Override
@@ -89,15 +92,15 @@ public class AlipayActivity extends BaseActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.do_pay:
-                Map<String, String> params = new HashMap<>();
+                Map<String, Object> params = new HashMap<>();
                 NetClient.newBuilder(this)
-                        .baseUrl("http://pqq.free.idcfengye.com/payment/")
+                        .baseUrl("http://pqq.vipgz1.idcfengye.com/payment/")
                         .method("pay")
                         .params(params)
                         .callBack(new ProgressCallBack<AllJsonObject>() {
                             @Override
                             public void onSuccess(AllJsonObject result) {
-                                String orderInfo = result.getResponseBodyJson().get("data").getAsString();
+                                String orderInfo = result.getResponseBodyJson().getString("data");
                                 if (TextUtils.isEmpty(orderInfo)) {
                                     mPayResult.setText("调用后台订单返回data为空");
                                     return;
@@ -135,5 +138,28 @@ public class AlipayActivity extends BaseActivity implements View.OnClickListener
         // 必须异步调用
         Thread payThread = new Thread(payRunnable);
         payThread.start();
+    }
+
+    private void doSync(PayResult payResult){
+        Map<String, Object> params = new HashMap<>();
+        params.put("appId", "fdfdfdfd");
+        params.put("token", "fdfdfdfd");
+        params.put("data", payResult);
+        NetClient.newBuilder(this)
+                .baseUrl("http://pqq.vipgz1.idcfengye.com/payment/")
+                .method("rece")
+                .params(params)
+                .callBack(new ProgressCallBack<AllJsonObject>() {
+                    @Override
+                    public void onSuccess(AllJsonObject result) {
+                        showToast("同步后台成功");
+                    }
+
+                    @Override
+                    public void onFailed(String errors) {
+                        super.onFailed(errors);
+                        showToast("同步后台失败");
+                    }
+                }).sendPost();
     }
 }

@@ -33,7 +33,7 @@ public class NetClient {
         /** 请求方法 */
         private String method;
         /** 请求参数 */
-        private Map<String, String> params;
+        private Map<String, Object> params;
         /** 文件列表 */
         private Map<String, File> files;
         /** context */
@@ -77,7 +77,7 @@ public class NetClient {
             return this;
         }
 
-        public Builder params(Map<String, String> params) {
+        public Builder params(Map<String, Object> params) {
             this.params = params;
             config.setParameters(this.params);
             return this;

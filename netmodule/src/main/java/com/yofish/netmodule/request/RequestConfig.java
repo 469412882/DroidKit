@@ -41,7 +41,7 @@ public class RequestConfig {
     /**
      * 请求参数，new出一个map对象，将默认的先添加进去
      */
-    private Map<String, String> parameters = new HashMap<>();
+    private Map<String, Object> parameters = new HashMap<>();
 
     /**
      * 请求参数，上传的文件map
@@ -100,11 +100,11 @@ public class RequestConfig {
         this.method = method;
     }
 
-    public Map<String, String> getParameters() {
+    public Map<String, Object> getParameters() {
         return parameters;
     }
 
-    public void setParameters(Map<String, String> parameters) {
+    public void setParameters(Map<String, Object> parameters) {
         this.parameters.clear();
         if (parameters == null) {
             return;

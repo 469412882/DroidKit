@@ -1,6 +1,6 @@
 package com.yofish.netmodule.datatype;
 
-import com.google.gson.JsonObject;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * file description
@@ -8,17 +8,17 @@ import com.google.gson.JsonObject;
  * Created by hch on 2018/12/7.
  */
 public class AllJsonObject {
-    private JsonObject responseBodyJson;
+    private JSONObject responseBodyJson;
 
-    public AllJsonObject(JsonObject result){
+    public AllJsonObject(JSONObject result){
         this.responseBodyJson = result;
     }
 
-    public JsonObject getResponseBodyJson() {
+    public JSONObject getResponseBodyJson() {
         return responseBodyJson;
     }
 
-    public void setResponseBodyJson(JsonObject responseBodyJson) {
+    public void setResponseBodyJson(JSONObject responseBodyJson) {
         this.responseBodyJson = responseBodyJson;
     }
 }

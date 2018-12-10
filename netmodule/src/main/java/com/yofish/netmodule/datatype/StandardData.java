@@ -1,5 +1,7 @@
 package com.yofish.netmodule.datatype;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -16,25 +18,33 @@ import java.lang.reflect.Type;
  */
 public class StandardData {
 
-    public static void successData(ICallBack callBack, String data){
+    public static void successData(ICallBack callBack, String data) {
+        //获取接口中的泛型
         Type type = Utility.getGenericTypeFromClass(callBack.getClass());
         //需要所有的responseBody字符串
-        if (type == AllString.class) {
+        if (AllString.class == type) {
             callBack.onSuccess(new AllString(data));
+            return;
         }
         //需要所有的responseBody转换成json串
-        if (type == AllJsonObject.class) {
-            JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
+        if (AllJsonObject.class == type) {
+            JSONObject jsonObject = JSON.parseObject(data);
             callBack.onSuccess(new AllJsonObject(jsonObject));
+            return;
         }
         //按标准过滤信息
-        Gson gson = new Gson();
-        BaseResultEntity entity = gson.fromJson(data, BaseResultEntity.class);
+        BaseResultEntity entity = JSON.parseObject(data, BaseResultEntity.class);
         int code = Integer.valueOf(entity.getCode());
         /* 过滤接口的成功标识 */
         if (1 == code) {
-            String content = gson.toJson(entity.getData());
+            String content = JSON.toJSONString(entity.getData());
+            if (type == null) {
+                callBack.onSuccess(content);
+                return;
+            }
             callBack.onSuccess(Utility.parseDataByType(content, callBack.getClass()));
+        } else {
+            callBack.onFailed("失败code=" + code + "reason:" + entity.getDesc());
         }
     }
 }
