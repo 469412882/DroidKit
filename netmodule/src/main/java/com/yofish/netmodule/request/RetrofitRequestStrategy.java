@@ -63,12 +63,23 @@ public class RetrofitRequestStrategy extends BaseRequestStrategy {
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
     }
 
+    private String getParamsString(RequestConfig config) {
+        String content = "";
+        if (config.getObjectParameters() != null) {
+            content = JSON.toJSONString(config.getObjectParameters());
+        } else {
+            content = config.getParameters() != null ? JSON.toJSONString(config.getParameters()) : "";
+        }
+        return content;
+    }
+
     @Override
     public void excutePost(RequestConfig config) {
         super.excutePost(config);
         BaseSubscriber subscriber = generatorSubscriber(config.getCallBack());
         apiService = getRetrofit(config).create(ApiService.class);
-        String content = config.getParameters() != null ? JSON.toJSONString(config.getParameters()): "";
+
+        String content = getParamsString(config);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), content);
         apiService
                 .excutePost(config.getMethod(), body)

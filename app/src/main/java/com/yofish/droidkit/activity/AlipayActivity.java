@@ -57,11 +57,11 @@ public class AlipayActivity extends BaseActivity implements View.OnClickListener
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         mPayResult.setText("支付成功" + JSON.toJSONString(payResult));
-                        doSync(payResult);
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         mPayResult.setText("支付失败" + JSON.toJSONString(payResult));
                     }
+                    doSync(payResult);
                     break;
                 }
                 default:
@@ -141,14 +141,10 @@ public class AlipayActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void doSync(PayResult payResult){
-        Map<String, Object> params = new HashMap<>();
-        params.put("appId", "fdfdfdfd");
-        params.put("token", "fdfdfdfd");
-        params.put("data", payResult);
         NetClient.newBuilder(this)
                 .baseUrl("http://pqq.vipgz1.idcfengye.com/payment/")
                 .method("rece")
-                .params(params)
+                .params(payResult)
                 .callBack(new ProgressCallBack<AllJsonObject>() {
                     @Override
                     public void onSuccess(AllJsonObject result) {

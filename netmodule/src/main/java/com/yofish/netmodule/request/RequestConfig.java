@@ -44,6 +44,11 @@ public class RequestConfig {
     private Map<String, Object> parameters = new HashMap<>();
 
     /**
+     * 请求参数，以objectParameters对象转化为一个json串的形式传递参数
+     */
+    private Object objectParameters;
+
+    /**
      * 请求参数，上传的文件map
      */
     private Map<String, File> files;
@@ -110,6 +115,17 @@ public class RequestConfig {
             return;
         }
         this.parameters.putAll(parameters);
+    }
+
+    public void setObjectParameters(Object objectParameters) {
+        if (objectParameters == null) {
+            return;
+        }
+        this.objectParameters = objectParameters;
+    }
+
+    public Object getObjectParameters() {
+        return objectParameters;
     }
 
     public ICallBack getCallBack() {

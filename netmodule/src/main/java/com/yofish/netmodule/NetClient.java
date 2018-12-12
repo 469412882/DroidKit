@@ -33,6 +33,8 @@ public class NetClient {
         /** 请求方法 */
         private String method;
         /** 请求参数 */
+        private Object objectParams;
+        /** 请求参数 */
         private Map<String, Object> params;
         /** 文件列表 */
         private Map<String, File> files;
@@ -80,6 +82,12 @@ public class NetClient {
         public Builder params(Map<String, Object> params) {
             this.params = params;
             config.setParameters(this.params);
+            return this;
+        }
+
+        public Builder params(Object objectParams) {
+            this.objectParams = objectParams;
+            config.setObjectParameters(this.objectParams);
             return this;
         }
 
