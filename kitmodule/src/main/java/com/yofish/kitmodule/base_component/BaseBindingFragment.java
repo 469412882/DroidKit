@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yofish.kitmodule.base_component.viewmodel.BaseViewModel;
+import com.yofish.kitmodule.util.PagerInfo;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -28,6 +29,7 @@ public abstract class BaseBindingFragment<V extends ViewDataBinding, VM extends 
     protected V binding;
     protected VM viewModel;
     protected int viewModelId;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +84,13 @@ public abstract class BaseBindingFragment<V extends ViewDataBinding, VM extends 
                 showSnackBar(s);
             }
         });
+        //页数更新
+        viewModel.getUiLiveData().getUpdatePageEvent().observe(this, new Observer<PagerInfo>() {
+            @Override
+            public void onChanged(@Nullable PagerInfo pagerInfo) {
+                updatePage(pagerInfo);
+            }
+        });
         //加载对话框消失
         viewModel.getUiLiveData().getDismissDialogEvent().observe(this, new Observer<Boolean>() {
             @Override
@@ -112,6 +121,20 @@ public abstract class BaseBindingFragment<V extends ViewDataBinding, VM extends 
                 onBackPressed();
             }
         });
+        //加载结束
+        viewModel.getUiLiveData().getLoadingCompleteEvent().observe(this, new Observer() {
+            @Override
+            public void onChanged(@Nullable Object o) {
+                loadingComplete();
+            }
+        });
+    }
+
+    /**
+     * ViewModel加载完数据后会通过LiveData通知调用此方法
+     */
+    public void loadingComplete() {
+
     }
 
     /**

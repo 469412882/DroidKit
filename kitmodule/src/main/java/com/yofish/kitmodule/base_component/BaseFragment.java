@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.trello.rxlifecycle.components.support.RxFragment;
+import com.yofish.kitmodule.util.PagerInfo;
 
 
 /**
@@ -169,6 +170,15 @@ public abstract class BaseFragment extends RxFragment {
     }
 
     public void onBackPressed(){
+
+    }
+
+    /**
+     * 更新页数
+     *
+     * @param pagerInfo pagerInfo
+     */
+    public void updatePage(PagerInfo pagerInfo) {
 
     }
 

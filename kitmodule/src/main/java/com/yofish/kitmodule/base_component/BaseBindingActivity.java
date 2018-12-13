@@ -18,7 +18,7 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 /**
- * file description
+ * 数据绑定Activity基类
  * <p>
  * Created by hch on 2018/12/12.
  */
@@ -39,15 +39,24 @@ public abstract class BaseBindingActivity<V extends ViewDataBinding, VM extends 
 
     protected abstract VM initViewModel();
 
-    public void loadingComplete(){
+    /**
+     * ViewModel加载完数据后会通过LiveData通知调用此方法
+     */
+    public void loadingComplete() {
 
     }
 
+    /**
+     * 此方法为不用数据绑定需要实现的方法,否则不能重写此方法
+     */
     @Override
     protected final void initViews() {
 
     }
 
+    /**
+     * 初始化views
+     */
     protected abstract void initBindingViews();
 
     /**
@@ -77,7 +86,9 @@ public abstract class BaseBindingActivity<V extends ViewDataBinding, VM extends 
 
     }
 
-    //注册ViewModel与View的契约UI回调事件
+    /**
+     * 注册ViewModel与View的契约UI回调事件
+     */
     private void registorUIChangeLiveDataCallBack() {
         //加载对话框显示
         viewModel.getUiLiveData().getShowDialogEvent().observe(this, new Observer<String>() {
@@ -86,12 +97,14 @@ public abstract class BaseBindingActivity<V extends ViewDataBinding, VM extends 
                 showAlertDialog(content);
             }
         });
+        //snackBar显示
         viewModel.getUiLiveData().getSnackBarEvent().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 showSnackBar(s);
             }
         });
+        //页数更新
         viewModel.getUiLiveData().getUpdatePageEvent().observe(this, new Observer<PagerInfo>() {
             @Override
             public void onChanged(@Nullable PagerInfo pagerInfo) {
@@ -128,6 +141,7 @@ public abstract class BaseBindingActivity<V extends ViewDataBinding, VM extends 
                 onBackPressed();
             }
         });
+        //加载结束
         viewModel.getUiLiveData().getLoadingCompleteEvent().observe(this, new Observer() {
             @Override
             public void onChanged(@Nullable Object o) {
@@ -137,9 +151,11 @@ public abstract class BaseBindingActivity<V extends ViewDataBinding, VM extends 
     }
 
 
+
     /**
-     * 创建ViewModel
-     *
+     *   ViewModel需要通过这种方式创建，因为这种创建方式可以判断是否有缓存，
+     *   如果不创建，则BaseBindingActivity 会自动创建泛型中的对象
+     *   如果没有泛型，则BaseBindingActivity 会自动创建BaseViewModel的对象
      * @param cls
      * @param <T>
      * @return

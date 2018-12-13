@@ -14,10 +14,23 @@ import com.yofish.netmodule.callback.BaseCallBack;
  */
 public class BankInfoRepository extends BaseRepository<com.yofish.droidkit.repository.bean.BankData> {
 
+    /**
+     * 是否要加载假数据
+     *
+     * @return boolean
+     */
+    @Override
+    protected boolean isFake() {
+        return super.isFake();
+    }
+
     public BankInfoRepository(Context context) {
         super(context);
     }
 
+    /**
+     * 加载网络数据
+     */
     @Override
     public void requestNetData() {
         NetClient.newBuilder(getContext())
@@ -48,11 +61,17 @@ public class BankInfoRepository extends BaseRepository<com.yofish.droidkit.repos
                 }).sendPost();
     }
 
+    /**
+     * 加载缓存数据
+     */
     @Override
     public void loadCacheData() {
 
     }
 
+    /**
+     * 加载假数据
+     */
     @Override
     public void loadFakeData() {
 

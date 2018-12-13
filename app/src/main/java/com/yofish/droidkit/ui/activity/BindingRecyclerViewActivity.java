@@ -60,11 +60,13 @@ public class BindingRecyclerViewActivity extends BaseBindingActivity<ActivityRec
         });
     }
 
+
     @Override
     public void loadingComplete() {
         super.loadingComplete();
         binding.container.loadComplete();
     }
+
 
     @Override
     public void updatePage(PagerInfo pagerInfo) {
