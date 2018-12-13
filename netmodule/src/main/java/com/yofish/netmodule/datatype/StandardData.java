@@ -17,6 +17,8 @@ import java.lang.reflect.Type;
  * Created by hch on 2018/12/7.
  */
 public class StandardData {
+    /** 运行异常错误 */
+    public static final String RUNTIME_EXCEPTION_CODE = "250";
 
     public static void successData(ICallBack callBack, String data) {
         //获取接口中的泛型
@@ -44,7 +46,7 @@ public class StandardData {
             }
             callBack.onSuccess(Utility.parseDataByType(content, callBack.getClass()));
         } else {
-            callBack.onFailed("失败code=" + code + "reason:" + entity.getDesc());
+            callBack.onFailed(entity.getCode(), entity.getDesc());
         }
     }
 }

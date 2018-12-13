@@ -195,8 +195,7 @@ public class RefreshContainer extends SwipeRefreshLayout {
             return;
         }
         RecyclerView recyclerView = (RecyclerView) mScrollableChild;
-        CommonAdapter adapter = (CommonAdapter) recyclerView.getAdapter();
-        wrapper = new HeaderAndFooterWrapper(adapter);
+        wrapper = new HeaderAndFooterWrapper(recyclerView.getAdapter());
         wrapper.addFootView(mLoadMoreUtils.getFooterView());
         recyclerView.setAdapter(wrapper);
         wrapper.notifyDataSetChanged();

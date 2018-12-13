@@ -12,7 +12,7 @@ public interface ICallBack<T> {
 
     void onSuccess(T t);
 
-    void onFailed(String errors);
+    void onFailed(String code, String errors);
 
     void onStart();
 

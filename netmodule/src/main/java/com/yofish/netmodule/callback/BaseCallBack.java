@@ -25,7 +25,7 @@ public abstract class BaseCallBack<T> implements ICallBack<T> {
     public abstract void onSuccess(T t);
 
     @Override
-    public abstract void onFailed(String errors);
+    public abstract void onFailed(String code, String errors);
 
     @Override
     public void onProgress(int progress, long total) {

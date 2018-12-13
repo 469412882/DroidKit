@@ -2,10 +2,10 @@ package com.yofish.droidkit.utils;
 
 
 import com.yofish.droidkit.R;
-import com.yofish.droidkit.bean.MainConfigData;
-import com.yofish.droidkit.fragment.FragmentFind;
-import com.yofish.droidkit.fragment.FragmentHome;
-import com.yofish.droidkit.fragment.FragmentUser;
+import com.yofish.droidkit.repository.bean.MainConfigData;
+import com.yofish.droidkit.ui.fragment.FragmentFind;
+import com.yofish.droidkit.ui.fragment.FragmentHome;
+import com.yofish.droidkit.ui.fragment.FragmentUser;
 
 import java.util.HashMap;
 

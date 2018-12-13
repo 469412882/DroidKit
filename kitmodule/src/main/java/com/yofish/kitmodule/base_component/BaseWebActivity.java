@@ -85,7 +85,7 @@ public class BaseWebActivity extends BaseActivity {
     }
 
     @Override
-    protected int setLayoutId() {
+    protected int setLayoutId(Bundle savedInstanceState) {
         return R.layout.base_web_activity;
     }
 
@@ -101,6 +101,11 @@ public class BaseWebActivity extends BaseActivity {
     protected void initViews() {
         mWebview = (X5WebView) findViewById(R.id.base_webview);
         mPbar = (ProgressBar) findViewById(R.id.progressBar);
+    }
+
+    @Override
+    protected void loadData() {
+
     }
 
     /**

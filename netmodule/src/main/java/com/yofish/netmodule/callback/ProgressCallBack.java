@@ -41,7 +41,7 @@ public abstract class ProgressCallBack<T> extends BaseCallBack<T> {
     }
 
     @Override
-    public void onFailed(String errors) {
+    public void onFailed(String code, String errors) {
         dismissDialog();
     }
 

@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+    dataBinding {
+        enabled true
+    }
     compileSdkVersion cfgs.COMPILE_SDK_VERSION
     buildToolsVersion cfgs.BUILDTOOLS_VERSION
     defaultConfig {
@@ -61,12 +64,7 @@ dependencies {
     /* router */
     implementation "com.alibaba:arouter-api:${cfgs.arouter_api_version}"
     annotationProcessor "com.alibaba:arouter-compiler:${cfgs.arouter_compiler_version}"
-
-
-    implementation project(':netmodule')
-    implementation project(':imagemodule')
     implementation project(':kitmodule')
-
     // 支付宝 SDK AAR 包所需的配置
-    implementation (name: 'alipaySdk-15.5.9-20181123210601', ext: 'aar')
+    implementation(name: 'alipaySdk-15.5.9-20181123210601', ext: 'aar')
 }

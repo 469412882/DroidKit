@@ -199,7 +199,7 @@ public class RetrofitRequestStrategy extends BaseRequestStrategy {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                callBack.onFailed(e.getMessage());
+                callBack.onFailed(StandardData.RUNTIME_EXCEPTION_CODE, e.getMessage());
                 onCompleted();
             }
         };
@@ -233,7 +233,7 @@ public class RetrofitRequestStrategy extends BaseRequestStrategy {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                callBack.onFailed(e.getMessage());
+                callBack.onFailed(StandardData.RUNTIME_EXCEPTION_CODE, e.getMessage());
                 onCompleted();
             }
         };
@@ -262,7 +262,7 @@ public class RetrofitRequestStrategy extends BaseRequestStrategy {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                callBack.onFailed(e.getMessage());
+                callBack.onFailed(StandardData.RUNTIME_EXCEPTION_CODE, e.getMessage());
                 onCompleted();
             }
 
@@ -314,7 +314,7 @@ public class RetrofitRequestStrategy extends BaseRequestStrategy {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                callBack.onFailed(e.getMessage());
+                callBack.onFailed(StandardData.RUNTIME_EXCEPTION_CODE, e.getMessage());
                 onCompleted();
             }
 

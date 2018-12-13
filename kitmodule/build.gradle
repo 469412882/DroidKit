@@ -2,6 +2,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'org.greenrobot.greendao'
 
 android {
+    dataBinding {
+        enabled true
+    }
     compileSdkVersion cfgs.COMPILE_SDK_VERSION
     buildToolsVersion cfgs.BUILDTOOLS_VERSION
 
@@ -29,7 +32,7 @@ android {
         }
     }
 
-    greendao{
+    greendao {
         schemaVersion 2
     }
 
@@ -48,19 +51,23 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support:multidex:1.0.3'
     implementation "com.android.support:design:${cfgs.SUPPORT_LIB_VERSION}"
-
     /*rx-retrofit-绑定生命页面周期*/
     implementation 'com.trello:rxlifecycle:1.0'
     implementation 'com.trello:rxlifecycle-components:1.0'
     //json
     implementation 'com.google.code.gson:gson:2.8.5'
-
     implementation 'org.greenrobot:greendao:3.2.2'
     implementation 'net.zetetic:android-database-sqlcipher:3.5.7'
-
     implementation "com.android.support:recyclerview-v7:${cfgs.SUPPORT_LIB_VERSION}"
     implementation 'com.nineoldandroids:library:2.4.0'
     /* router */
     implementation "com.alibaba:arouter-api:${cfgs.arouter_api_version}"
     annotationProcessor "com.alibaba:arouter-compiler:${cfgs.arouter_compiler_version}"
+    /* lifecycle livedata */
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+
+    api project(':netmodule')
+    api project(':imagemodule')
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.yofish.droidkit.activity.MainActivity">
+    tools:context=".ui.activity.MainActivity">
 
     <Button
         android:id="@+id/network"
@@ -59,6 +59,13 @@
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:text="支付宝集成"
-        app:layout_constraintTop_toBottomOf="@+id/router"/>
+        app:layout_constraintTop_toBottomOf="@+id/video"/>
+
+    <Button
+        android:id="@+id/dataBinding"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="databinding"
+        app:layout_constraintTop_toBottomOf="@+id/alipay"/>
 
 </android.support.constraint.ConstraintLayout>

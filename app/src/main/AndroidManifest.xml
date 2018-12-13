@@ -48,10 +48,10 @@
         android:supportsRtl="true"
         android:theme="@style/DroidKitTheme">
 
-        <activity android:name="com.yofish.droidkit.activity.MainActivity"
+        <activity android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name="com.yofish.droidkit.activity.IntroActivity"
+        <activity android:name=".ui.activity.IntroActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -61,44 +61,48 @@
         </activity>
 
         <activity
-            android:name="com.yofish.droidkit.activity.NetWorkActivity"
+            android:name=".ui.activity.NetWorkActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.yofish.droidkit.activity.DownloadActivity"
+            android:name=".ui.activity.DownloadActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yofish.droidkit.activity.ImgLoaderActivity"
+            android:name=".ui.activity.ImgLoaderActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.yofish.droidkit.activity.perission.PermissionMainActivity"
+            android:name=".ui.activity.perission.PermissionMainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yofish.droidkit.activity.perission.PermissionAnyWhereActivity"
+            android:name=".ui.activity.perission.PermissionAnyWhereActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yofish.droidkit.activity.perission.PermissionListenerActivity"
+            android:name=".ui.activity.perission.PermissionListenerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yofish.droidkit.activity.perission.PermissionRationaleActivity"
+            android:name=".ui.activity.perission.PermissionRationaleActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yofish.droidkit.activity.perission.PermissionAnnotationActivity"
+            android:name=".ui.activity.perission.PermissionAnnotationActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.yofish.droidkit.activity.UIActivity"
+            android:name=".ui.activity.UIActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yofish.droidkit.activity.ListViewActivity"
+            android:name=".ui.activity.ListViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yofish.droidkit.activity.RecyclerViewActivity"
+            android:name=".ui.activity.RecyclerViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yofish.droidkit.activity.VideoActivity"
+            android:name=".ui.activity.VideoActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.AlipayActivity"
+        <activity android:name=".ui.activity.AlipayActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.PullRefreshRecyclerViewActivity"
+        <activity android:name=".ui.activity.BindingRecyclerViewActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.DataBindingHomeViewActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.PullRefreshRecyclerViewActivity"
             android:screenOrientation="portrait" />
 
     </application>
