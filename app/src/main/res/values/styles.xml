@@ -8,5 +8,21 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <declare-styleable name="PtrClassicHeader"><attr format="integer" name="ptr_rotate_ani_time"/></declare-styleable>
+    <declare-styleable name="PtrFrameLayout">
+        <attr format="reference" name="ptr_header"/>
+        <attr format="reference" name="ptr_content"/>
+        <attr format="float" name="ptr_resistance"/>
+        <attr format="float" name="ptr_ratio_of_header_height_to_refresh"/>
+        <attr format="integer" name="ptr_duration_to_close"/>
+        <attr format="integer" name="ptr_duration_to_close_header"/>
+        <attr format="boolean" name="ptr_pull_to_fresh"/>
+        <attr format="boolean" name="ptr_keep_header_when_refresh"/>
+        <attr format="boolean" name="ptr_keep_header_float_content"/>
+        <attr format="string" name="ptr_header_shimmer_text"/>
+        <attr format="color" name="ptr_header_shimmer_text_color"/>
+        <attr format="string" name="ptr_header_shimmer_points_array"/>
+    </declare-styleable>
+
 
 </resources>

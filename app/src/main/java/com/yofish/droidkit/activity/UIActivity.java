@@ -43,6 +43,7 @@ public class UIActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.bottom_dialog).setOnClickListener(this);
         findViewById(R.id.listview).setOnClickListener(this);
         findViewById(R.id.recyclerview).setOnClickListener(this);
+        findViewById(R.id.pullrv).setOnClickListener(this);
         findViewById(R.id.elevation_view).setOnTouchListener(new View.OnTouchListener() {
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -154,6 +155,9 @@ public class UIActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.recyclerview:
                 startActivity(new Intent(this, RecyclerViewActivity.class));
+                break;
+            case R.id.pullrv:
+                startActivity(new Intent(this, PullRefreshRecyclerViewActivity.class));
                 break;
         }
     }
