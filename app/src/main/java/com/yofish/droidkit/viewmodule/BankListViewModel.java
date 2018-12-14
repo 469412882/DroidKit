@@ -1,7 +1,6 @@
 package com.yofish.droidkit.viewmodule;
 
 import android.app.Application;
-import android.content.Context;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 
@@ -11,9 +10,7 @@ import com.yofish.droidkit.repository.BankInfoRepository;
 import com.yofish.droidkit.repository.bean.BankData;
 import com.yofish.droidkit.repository.bean.BankInfoBean;
 import com.yofish.droidkit.viewmodule.item.BankItemViewModel;
-import com.yofish.kitmodule.baseAdapter.recyclerview.CommonAdapter;
 import com.yofish.kitmodule.baseAdapter.recyclerview.DBRvAdapter;
-import com.yofish.kitmodule.baseAdapter.recyclerview.base.ViewHolder;
 import com.yofish.kitmodule.base_component.repository.IRepositoryCallBack;
 import com.yofish.kitmodule.base_component.viewmodel.BaseViewModel;
 import com.yofish.kitmodule.util.PagerInfo;
@@ -29,7 +26,9 @@ import java.util.List;
 public class BankListViewModel extends BaseViewModel {
     /** 非ItemViewModel类型的adapter */
 //    public ObservableField<CommonAdapter<BankInfoBean>> mAdapter = new ObservableField<>();
-    /** ItemViewModel类型的adapter */
+    /**
+     * ItemViewModel类型的adapter
+     */
     public ObservableField<DBRvAdapter<BankItemViewModel>> mAdapter = new ObservableField<>();
 
     public BankListViewModel(@NonNull Application application) {
@@ -42,7 +41,7 @@ public class BankListViewModel extends BaseViewModel {
                 holder.setText(R.id.bank_name, bankInfoBean.getBankName());
             }
         });*/
-       mAdapter.set(new DBRvAdapter<BankItemViewModel>(R.layout.banklist_item_bding, BR.viewModel));
+        mAdapter.set(new DBRvAdapter<BankItemViewModel>(R.layout.banklist_item_bding, BR.viewModel));
     }
 
     public void requestRepository(final boolean isLoadMore) {

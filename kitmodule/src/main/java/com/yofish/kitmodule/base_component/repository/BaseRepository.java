@@ -1,7 +1,5 @@
 package com.yofish.kitmodule.base_component.repository;
 
-import android.annotation.SuppressLint;
-import android.app.Application;
 import android.content.Context;
 
 import com.yofish.netmodule.NetClient;
@@ -14,23 +12,20 @@ import java.util.Map;
  * <p>
  * Created by hch on 2018/12/12.
  */
-public abstract class BaseRepository<T> implements IRepository {
+public abstract class BaseRepository<T> extends BaseCallBack<T> implements IRepository {
     /**
      * 设置baseUrl
      */
-    protected String getBaseUrl(){
-        return null;
-    }
+    protected abstract String getBaseUrl();
 
     /**
      * 设置method
      */
-    protected String getMethod(){
-        return null;
-    }
+    protected abstract String getMethod();
 
     /**
      * 设置key value类型的参数，如果存在Object参数，则此参数无效
+     * 如果不需要参数，则不必重写此方法
      */
     protected Map<String, Object> getParams() {
         return null;
@@ -38,6 +33,7 @@ public abstract class BaseRepository<T> implements IRepository {
 
     /**
      * 设置整个对象的参数，如果key value类型的参数和此参数同时存在，则优先使用此类型的参数，Map则无效
+     * 如果不需要参数，则不必重写此方法
      */
     protected Object getObjectParams() {
         return null;
@@ -45,10 +41,20 @@ public abstract class BaseRepository<T> implements IRepository {
 
     protected IRepositoryCallBack<T> callBack;
 
+    /**
+     * 是否加载假数据， 如需要，重写此方法，返回true即可
+     *
+     * @return
+     */
     protected boolean isFake() {
         return false;
     }
 
+    /**
+     * 是否需要加载缓存数据，如需要，重写此方法，返回true即可
+     *
+     * @return
+     */
     protected boolean shouldLoadCache() {
         return false;
     }
@@ -67,6 +73,9 @@ public abstract class BaseRepository<T> implements IRepository {
         this.callBack = callBack;
     }
 
+    /**
+     * 加载数据的入口方法
+     */
     @Override
     public void loadData() {
         if (isFake()) {
@@ -84,6 +93,47 @@ public abstract class BaseRepository<T> implements IRepository {
      */
     @Override
     public void requestNetData() {
+        NetClient.newBuilder(getContext())
+                .baseUrl(getBaseUrl())
+                .method(getMethod())
+                .params(getObjectParams())
+                .params(getParams())
+                .callBack(this).sendPost();
+    }
 
+    /**
+     * NetClient的回调
+     *
+     * @param t t
+     */
+    @Override
+    public void onSuccess(T t) {
+        if (callBack != null) {
+            callBack.onSuccess(t);
+        }
+    }
+
+    /**
+     * NetClient的回调
+     *
+     * @param code   code
+     * @param errors errors
+     */
+    @Override
+    public void onFailed(String code, String errors) {
+        if (callBack != null) {
+            callBack.onFailed(code, errors);
+        }
+    }
+
+    /**
+     * NetClient的回调
+     */
+    @Override
+    public void onComplete() {
+        super.onComplete();
+        if (callBack != null) {
+            callBack.onComplete();
+        }
     }
 }
