@@ -68,4 +68,11 @@
         android:text="databinding"
         app:layout_constraintTop_toBottomOf="@+id/alipay"/>
 
+    <Button
+        android:id="@+id/dataBindingimg"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="databinding-img"
+        app:layout_constraintTop_toBottomOf="@+id/dataBinding"/>
+
 </android.support.constraint.ConstraintLayout>

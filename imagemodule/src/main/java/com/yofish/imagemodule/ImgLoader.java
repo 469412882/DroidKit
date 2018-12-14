@@ -1,6 +1,7 @@
 package com.yofish.imagemodule;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.widget.ImageView;
 
@@ -170,6 +171,11 @@ public class ImgLoader {
 
         public Builder resourceId(int resourceId) {
             options.setResourceId(resourceId);
+            return this;
+        }
+
+        public Builder bitmap(Bitmap bitmap) {
+            options.setBitmap(bitmap);
             return this;
         }
 

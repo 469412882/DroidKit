@@ -125,6 +125,8 @@ public class GlideStrategy extends BaseImgLoaderStrategy {
                         break;
                     case FILE:
                         load = with.load(options.getFile());
+                    case BITMAP:
+                        load = with.load(options.getBitmap());
                         break;
                 }
             } catch (Exception e) {

@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.yofish.imagemodule.ImgLoader;
+import com.yofish.imagemodule.ImgLoaderListener;
+import com.yofish.imagemodule.ImgOptions;
+import com.yofish.kitmodule.R;
 import com.yofish.kitmodule.baseAdapter.recyclerview.CommonAdapter;
 import com.yofish.kitmodule.baseAdapter.recyclerview.DBRvAdapter;
 
@@ -34,47 +37,47 @@ public class CommonBindingAdapter {
         var0.setImageResource(var1);
     }
 
-    @BindingAdapter({"bindNetImg"})
-    public static void loadNetImg(ImageView imageView, String url) {
-        ImgLoader.getInstance().load(url, imageView);
-//        if (TextUtils.isEmpty(url)) {
-//            Glide.clear(var0);
-//        } else {
-//            Glide.with(var0.getContext()).load(var1).crossFade().placeholder(drawable.anbui_netimg_default_rect_shape).into(var0);
-//        }
-    }
 
     @BindingAdapter({"bindBitmapImg"})
     public static void loadBitmapImg(ImageView imageView, Bitmap bitmap) {
-//        if (null == var1) {
-//            Glide.clear(var0);
-//        } else {
-//            Glide.with(var0.getContext()).load(var1).crossFade().placeholder(drawable.anbui_netimg_default_rect_shape).into(var0);
-//        }
+        if (null == bitmap) {
+            return;
+        }
+        new ImgLoader.Builder().loadType(ImgOptions.LoadType.BITMAP).bitmap(bitmap).into(imageView);
     }
 
-    @BindingAdapter({"bindNetImg", "imgShape"})
-    public static void loadNetImg(ImageView imageView, String url, int shape) {
-//        if (TextUtils.isEmpty(var1)) {
-//            Glide.clear(var0);
-//        } else {
-//            Object var3 = null;
-//            int var4 = drawable.anbui_netimg_default_rect_shape;
-//            if (0 == var2) {
-//                var3 = new GlideCircleTransform(var0.getContext());
-//                var4 = drawable.anbui_netimg_default_round_shape;
-//            } else if (1 == var2) {
-//                var3 = new GlideRoundTransform(var0.getContext());
-//                var4 = drawable.anbui_netimg_default_fillet_shape;
-//            }
-//
-//            if (null != var3) {
-//                Glide.with(var0.getContext()).load(var1).crossFade().placeholder(var4).error(var4).transform(new BitmapTransformation[]{(BitmapTransformation)var3}).into(var0);
-//            } else {
-//                Glide.with(var0.getContext()).load(var1).crossFade().placeholder(var4).error(var4).into(var0);
-//            }
-//
-//        }
+    /**
+     * imgShape=0原图 imgShape=1圆形图 imgShape=2圆角图
+     * @param imageView
+     * @param url
+     * @param shape
+     * @param imgLoaderListener
+     */
+    @BindingAdapter(value = {"bindNetImg", "imgShape", "bindNetImgListener"}, requireAll = false)
+    public static void loadNetImg(ImageView imageView, String url, int shape, ImgLoaderListener imgLoaderListener) {
+        if (TextUtils.isEmpty(url)) {
+            return;
+        } else {
+            int holder;
+            ImgLoader.Builder builder = new ImgLoader.Builder();
+            if (0 == shape) {
+                holder = R.drawable.netimg_default_rect_shape;
+                builder.url(url).placeHolder(holder).error(holder);
+            } else if (1 == shape) {
+                holder = R.drawable.netimg_default_round_shape;
+                builder.imgType(ImgOptions.ImgType.CIRCLE).url(url).placeHolder(holder).error(holder);
+            } else if (2 == shape) {
+                holder = R.drawable.netimg_default_fillet_shape;
+                builder.imgType(ImgOptions.ImgType.ROUND).url(url).placeHolder(holder).error(holder);
+            }
+
+            if (imgLoaderListener == null) {
+                builder.into(imageView);
+            }else {
+                builder.listener(imgLoaderListener).intoWithListener(imageView);
+            }
+
+        }
     }
 
 //    @BindingAdapter({"anbuiAdapter"})

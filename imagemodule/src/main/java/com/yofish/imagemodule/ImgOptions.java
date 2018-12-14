@@ -1,5 +1,6 @@
 package com.yofish.imagemodule;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.widget.ImageView;
 
@@ -46,6 +47,10 @@ public class ImgOptions {
      */
     private int resourceId;
     /**
+     * bitmap图片资源
+     */
+    private Bitmap bitmap;
+    /**
      * 字节类型图片
      */
     private byte[] imgByte;
@@ -69,7 +74,7 @@ public class ImgOptions {
     }
 
     public enum LoadType{
-        URL, PATH, URI, FILE, RESOURCEID, IMGBYTE
+        URL, PATH, URI, FILE, RESOURCEID, IMGBYTE, BITMAP
     }
 
     private ImgLoaderListener listener;
@@ -167,6 +172,14 @@ public class ImgOptions {
 
     public void setFile(File file) {
         this.file = file;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 
     public int getResourceId() {

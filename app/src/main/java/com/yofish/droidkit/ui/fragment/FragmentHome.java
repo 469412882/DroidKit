@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yofish.droidkit.ui.activity.AlipayActivity;
+import com.yofish.droidkit.ui.activity.BindingImageViewActivity;
 import com.yofish.droidkit.ui.activity.DataBindingHomeViewActivity;
 import com.yofish.kitmodule.base_component.BaseFragment;
 import com.yofish.kitmodule.router.CommonRouter;
@@ -40,6 +41,7 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.video).setOnClickListener(this);
         rootView.findViewById(R.id.alipay).setOnClickListener(this);
         rootView.findViewById(R.id.dataBinding).setOnClickListener(this);
+        rootView.findViewById(R.id.dataBindingimg).setOnClickListener(this);
     }
 
     @Override
@@ -82,6 +84,11 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
                 intent.setClass(getContext(), DataBindingHomeViewActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.dataBindingimg:
+                intent.setClass(getContext(), BindingImageViewActivity.class);
+                startActivity(intent);
+                break;
+
         }
     }
 }
