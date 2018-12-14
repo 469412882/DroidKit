@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.yofish.kitmodule.base_component.viewmodel.BaseViewModel.LoadStatus" />
+
+        <variable
+            name="loadStatusVM"
+            type="com.yofish.kitmodule.base_component.viewmodel.BaseViewModel" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{loadStatusVM.clickRetry}"
+        android:visibility="@{LoadStatus.NORMAL == loadStatusVM.loadStatus ? View.GONE : View.VISIBLE}">
+
+
+        <TextView
+            android:id="@+id/loadstatus_neterror"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawableTop="@{loadStatusVM.netErrRes}"
+            android:drawablePadding="20dp"
+            android:gravity="center"
+            android:text="@{loadStatusVM.netErrHint}"
+            android:visibility="@{LoadStatus.NETERR == loadStatusVM.loadStatus ? View.VISIBLE : View.GONE}" />
+
+        <TextView
+            android:id="@+id/loadstatus_nodata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawableTop="@{loadStatusVM.nodataRes}"
+            android:drawablePadding="20dp"
+            android:gravity="center"
+            android:text="@{loadStatusVM.nodataHint}"
+            android:visibility="@{LoadStatus.NODATA == loadStatusVM.loadStatus ? View.VISIBLE : View.GONE}" />
+    </RelativeLayout>
+</layout>

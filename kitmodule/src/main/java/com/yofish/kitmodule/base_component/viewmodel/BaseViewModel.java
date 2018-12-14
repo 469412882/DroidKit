@@ -5,9 +5,14 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
+import android.databinding.ObservableField;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
+import android.view.View;
 
+import com.yofish.kitmodule.R;
 import com.yofish.kitmodule.util.PagerInfo;
 
 import java.util.HashMap;
@@ -22,8 +27,18 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseVie
 
     private UILiveData uiLiveData;
 
+    public ObservableField<BaseViewModel.LoadStatus> loadStatus = new ObservableField<>(LoadStatus.NORMAL);
+    public ObservableField<String> netErrHint = new ObservableField<>();
+    public ObservableField<String> nodataHint = new ObservableField<>();
+    public ObservableField<Drawable> netErrRes = new ObservableField<>();
+    public ObservableField<Drawable> nodataRes = new ObservableField<>();
+
     public BaseViewModel(@NonNull Application application) {
         super(application);
+        netErrHint.set(application.getResources().getString(R.string.net_err));
+        nodataHint.set(application.getResources().getString(R.string.no_data));
+        netErrRes.set(application.getResources().getDrawable(R.drawable.load_neterr));
+        nodataRes.set(application.getResources().getDrawable(R.drawable.load_nodata));
     }
 
     /**
@@ -128,21 +143,37 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseVie
      * ViewModel通知Activity要做的事情可以在此定义
      */
     public class UILiveData extends SingleLiveEvent {
-        /** 显示弹窗 */
+        /**
+         * 显示弹窗
+         */
         private SingleLiveEvent<String> showDialogEvent;
-        /** 隐藏弹窗 */
+        /**
+         * 隐藏弹窗
+         */
         private SingleLiveEvent dismissDialogEvent;
-        /** 显示snackBar */
+        /**
+         * 显示snackBar
+         */
         private SingleLiveEvent<String> snackBarEvent;
-        /** 更新分页的页数 */
+        /**
+         * 更新分页的页数
+         */
         private SingleLiveEvent<PagerInfo> updatePageEvent;
-        /** 启动activity */
+        /**
+         * 启动activity
+         */
         private SingleLiveEvent<Map<String, Object>> startActivityEvent;
-        /** finish() */
+        /**
+         * finish()
+         */
         private SingleLiveEvent finishEvent;
-        /** 返回上一级，比如fragment回退栈 */
+        /**
+         * 返回上一级，比如fragment回退栈
+         */
         private SingleLiveEvent onBackPressedEvent;
-        /** 加载完成 */
+        /**
+         * 加载完成
+         */
         private SingleLiveEvent loadingComplete;
 
         public SingleLiveEvent<String> getShowDialogEvent() {
@@ -194,6 +225,96 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseVie
         public static String CLASS = "CLASS";
         public static String CANONICAL_NAME = "CANONICAL_NAME";
         public static String BUNDLE = "BUNDLE";
+    }
+
+    /**
+     * 无数据
+     */
+    public void setNoData() {
+        loadStatus.set(LoadStatus.NODATA);
+    }
+
+
+    /**
+     * 无数据，可设置提示语和图片
+     */
+    public void setNoData(String tip, Drawable res) {
+        setNoData();
+        if (!TextUtils.isEmpty(tip)) {
+            nodataHint.set(tip);
+        }
+        if (res != null) {
+            nodataRes.set(res);
+        }
+    }
+
+    /**
+     * 网络异常
+     */
+    public void setNetErr() {
+        loadStatus.set(LoadStatus.NETERR);
+    }
+
+    /**
+     * 网络异常，可设置提示语和图片
+     */
+    public void setNetErr(String tip, Drawable res) {
+        setNetErr();
+        if (!TextUtils.isEmpty(tip)) {
+            netErrHint.set(tip);
+        }
+        if (res != null) {
+            netErrRes.set(res);
+        }
+    }
+
+    /**
+     * 点击重试
+     *
+     * @param view view
+     */
+    public void clickRetry(View view) {
+        try {
+            if (loadStatus.get() == null) {
+                return;
+            }
+            switch (loadStatus.get()) {
+                case NODATA:
+                    this.clickNoData(view);
+                    break;
+                case NETERR:
+                    this.clickNetErr(view);
+            }
+
+            loadStatus.set(LoadStatus.NORMAL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * 网络点击
+     *
+     * @param view view
+     */
+    public void clickNetErr(View view) {
+    }
+
+    /**
+     * 无数据点击
+     *
+     * @param view view
+     */
+    public void clickNoData(View view) {
+    }
+
+
+
+    public static enum LoadStatus {
+        NORMAL,
+        NETERR,
+        NODATA
     }
 
     @Override

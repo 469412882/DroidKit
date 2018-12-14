@@ -2,6 +2,11 @@
 <layout>
 
     <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.yofish.kitmodule.base_component.viewmodel.BaseViewModel.LoadStatus" />
+
         <variable
             name="viewModel"
             type="com.yofish.droidkit.viewmodule.BankListViewModel" />
@@ -19,15 +24,20 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="@{LoadStatus.NORMAL == viewModel.loadStatus ? View.VISIBLE : View.GONE}"
             app:support_loadmore="true">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:bindAdapter="@{viewModel.mAdapter}"/>
+                app:bindAdapter="@{viewModel.mAdapter}" />
 
         </com.yofish.kitmodule.wedget.refresh.RefreshContainer>
+
+        <include
+            layout="@layout/loadstatus_pager"
+            app:loadStatusVM="@{viewModel}" />
 
     </LinearLayout>
 </layout>

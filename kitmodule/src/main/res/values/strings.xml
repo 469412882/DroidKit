@@ -19,4 +19,7 @@
     <string name="cube_ptr_refreshing">加载中...</string>
     <string name="cube_ptr_release_to_refresh">释放刷新</string>
     <string name="cube_ptr_seconds_ago"> 秒之前</string>
+
+    <string name="net_err">网络不给力 点击刷新^_^</string>
+    <string name="no_data">空空如也^_^</string>
 </resources>

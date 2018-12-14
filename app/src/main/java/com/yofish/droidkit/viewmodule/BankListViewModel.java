@@ -3,6 +3,7 @@ package com.yofish.droidkit.viewmodule;
 import android.app.Application;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
+import android.view.View;
 
 import com.yofish.droidkit.BR;
 import com.yofish.droidkit.R;
@@ -67,6 +68,7 @@ public class BankListViewModel extends BaseViewModel {
             @Override
             public void onFailed(String code, String desc) {
                 showSnacBar(desc);
+                setNetErr();
             }
 
             @Override
@@ -77,4 +79,9 @@ public class BankListViewModel extends BaseViewModel {
         repository.loadData();
     }
 
+    @Override
+    public void clickRetry(View view) {
+        super.clickRetry(view);
+        requestRepository(false);
+    }
 }
