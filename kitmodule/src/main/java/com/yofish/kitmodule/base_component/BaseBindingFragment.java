@@ -81,7 +81,7 @@ public abstract class BaseBindingFragment<V extends ViewDataBinding, VM extends 
         viewModel.getUiLiveData().getSnackBarEvent().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                showSnackBar(s);
+                showSnackBar(s, getActivity().getWindow().getDecorView());
             }
         });
         //页数更新
@@ -130,12 +130,6 @@ public abstract class BaseBindingFragment<V extends ViewDataBinding, VM extends 
         });
     }
 
-    /**
-     * ViewModel加载完数据后会通过LiveData通知调用此方法
-     */
-    public void loadingComplete() {
-
-    }
 
     /**
      * 创建ViewModel

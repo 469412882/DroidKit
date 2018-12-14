@@ -39,12 +39,7 @@ public abstract class BaseBindingActivity<V extends ViewDataBinding, VM extends 
 
     protected abstract VM initViewModel();
 
-    /**
-     * ViewModel加载完数据后会通过LiveData通知调用此方法
-     */
-    public void loadingComplete() {
 
-    }
 
     /**
      * 此方法为不用数据绑定需要实现的方法,否则不能重写此方法
@@ -101,7 +96,7 @@ public abstract class BaseBindingActivity<V extends ViewDataBinding, VM extends 
         viewModel.getUiLiveData().getSnackBarEvent().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                showSnackBar(s);
+                showSnackBar(s, getWindow().getDecorView());
             }
         });
         //页数更新

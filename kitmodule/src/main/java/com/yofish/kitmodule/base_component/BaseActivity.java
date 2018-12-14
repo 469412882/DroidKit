@@ -28,11 +28,11 @@ import static com.yofish.kitmodule.util.Utility.isDarkColor;
  * Created by hch on 2017/8/2.
  */
 
-public abstract class BaseActivity extends RxAppCompatActivity {
+public abstract class BaseActivity extends RxAppCompatActivity implements IUIHandle {
     private Toolbar mToolbar;
     private boolean fullScreenFlag = true;
     private boolean mIsFullScreen = false;
-    private AlertDialog mAlertDialog;
+    private UIHandleImpl uiHandleWrapper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         setContentView(setLayoutId(savedInstanceState));
         receiveData(getIntent());
         initViews();
+        uiHandleWrapper = new UIHandleImpl(this);
     }
 
     @Override
@@ -213,7 +214,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
      * @param msg msg
      */
     public void showToast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        uiHandleWrapper.showToast(msg);
     }
 
     /**
@@ -222,33 +223,14 @@ public abstract class BaseActivity extends RxAppCompatActivity {
      * @param content content
      */
     public void showAlertDialog(String content) {
-        if (mAlertDialog == null) {
-            mAlertDialog = new AlertDialog.Builder(this).setTitle("提示")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            showToast("确定");
-                        }
-                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            showToast("取消");
-                        }
-                    }).create();
-        }
-        mAlertDialog.setMessage(content);
-        if (!mAlertDialog.isShowing()) {
-            mAlertDialog.show();
-        }
+        uiHandleWrapper.showAlertDialog(content);
     }
 
     /**
      * 隐藏弹窗
      */
     public void dismissAlertDialog() {
-        if (mAlertDialog != null && mAlertDialog.isShowing()) {
-            mAlertDialog.dismiss();
-        }
+        uiHandleWrapper.dismissAlertDialog();
     }
 
     /**
@@ -256,8 +238,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
      *
      * @param content content
      */
-    public void showSnackBar(String content) {
-        Snackbar.make(getWindow().getDecorView(), content, Snackbar.LENGTH_SHORT).show();
+    public void showSnackBar(String content, View anchor) {
+        uiHandleWrapper.showSnackBar(content, anchor);
     }
 
     /**
@@ -267,11 +249,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
      * @param bundle 跳转所携带的信息
      */
     public void startActivity(Class<?> clz, Bundle bundle) {
-        Intent intent = new Intent(this, clz);
-        if (bundle != null) {
-            intent.putExtras(bundle);
-        }
-        startActivity(intent);
+        uiHandleWrapper.startActivity(clz, bundle);
     }
 
     /**
@@ -280,6 +258,13 @@ public abstract class BaseActivity extends RxAppCompatActivity {
      * @param pagerInfo pagerInfo
      */
     public void updatePage(PagerInfo pagerInfo) {
+        uiHandleWrapper.updatePage(pagerInfo);
+    }
+
+    /**
+     * ViewModel加载完数据后会通过LiveData通知调用此方法
+     */
+    public void loadingComplete() {
 
     }
 

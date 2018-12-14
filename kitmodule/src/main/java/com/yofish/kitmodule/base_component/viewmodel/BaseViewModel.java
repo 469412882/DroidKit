@@ -124,16 +124,25 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseVie
         uiLiveData.startActivityEvent.postValue(params);
     }
 
-
+    /**
+     * ViewModel通知Activity要做的事情可以在此定义
+     */
     public class UILiveData extends SingleLiveEvent {
-
+        /** 显示弹窗 */
         private SingleLiveEvent<String> showDialogEvent;
-        private SingleLiveEvent<String> snackBarEvent;
-        private SingleLiveEvent<PagerInfo> updatePageEvent;
+        /** 隐藏弹窗 */
         private SingleLiveEvent dismissDialogEvent;
+        /** 显示snackBar */
+        private SingleLiveEvent<String> snackBarEvent;
+        /** 更新分页的页数 */
+        private SingleLiveEvent<PagerInfo> updatePageEvent;
+        /** 启动activity */
         private SingleLiveEvent<Map<String, Object>> startActivityEvent;
+        /** finish() */
         private SingleLiveEvent finishEvent;
+        /** 返回上一级，比如fragment回退栈 */
         private SingleLiveEvent onBackPressedEvent;
+        /** 加载完成 */
         private SingleLiveEvent loadingComplete;
 
         public SingleLiveEvent<String> getShowDialogEvent() {

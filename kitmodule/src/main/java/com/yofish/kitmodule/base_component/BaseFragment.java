@@ -24,30 +24,23 @@ import com.yofish.kitmodule.util.PagerInfo;
  * Created by hch on 2017/8/3.
  */
 
-public abstract class BaseFragment extends RxFragment {
+public abstract class BaseFragment extends RxFragment implements IUIHandle {
 
-    /**
-     * 根view
-     */
+    /** 根view */
     protected View mRootView;
 
-    /**
-     * 是否对用户可见
-     */
+    /** 是否对用户可见 */
     protected boolean mIsVisible;
 
-    /**
-     * 是否需要懒加载
-     */
+    /** 是否需要懒加载 */
     protected boolean mShouldLazyLoad;
-    /**
-     * mAlertDialog
-     */
-    private AlertDialog mAlertDialog;
+    /** ui操作者，包装模式 */
+    private UIHandleImpl uiHandleWrapper;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        uiHandleWrapper = new UIHandleImpl(getContext());
     }
 
     @Nullable
@@ -118,34 +111,15 @@ public abstract class BaseFragment extends RxFragment {
      * @param content content
      */
     public void showAlertDialog(String content) {
-        if (mAlertDialog == null) {
-            mAlertDialog = new AlertDialog.Builder(getContext()).setTitle("提示")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            showToast("确定");
-                        }
-                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            showToast("取消");
-                        }
-                    }).create();
-        }
-        mAlertDialog.setMessage(content);
-        if (!mAlertDialog.isShowing()) {
-            mAlertDialog.show();
-        }
+        uiHandleWrapper.showAlertDialog(content);
     }
 
     public void dismissAlertDialog() {
-        if (mAlertDialog != null && mAlertDialog.isShowing()) {
-            mAlertDialog.dismiss();
-        }
+        uiHandleWrapper.dismissAlertDialog();
     }
 
-    public void showSnackBar(String content){
-        Snackbar.make(getView(), content, Snackbar.LENGTH_SHORT).show();
+    public void showSnackBar(String content, View anchor){
+        uiHandleWrapper.showSnackBar(content, anchor);
     }
 
     /**
@@ -155,11 +129,7 @@ public abstract class BaseFragment extends RxFragment {
      * @param bundle 跳转所携带的信息
      */
     public void startActivity(Class<?> clz, Bundle bundle) {
-        Intent intent = new Intent(getContext(), clz);
-        if (bundle != null) {
-            intent.putExtras(bundle);
-        }
-        startActivity(intent);
+        uiHandleWrapper.startActivity(clz, bundle);
     }
 
     public void finish(){
@@ -179,7 +149,14 @@ public abstract class BaseFragment extends RxFragment {
      * @param pagerInfo pagerInfo
      */
     public void updatePage(PagerInfo pagerInfo) {
+        uiHandleWrapper.updatePage(pagerInfo);
+    }
 
+    /**
+     * ViewModel加载完数据后会通过LiveData通知调用此方法
+     */
+    public void loadingComplete() {
+        uiHandleWrapper.loadingComplete();
     }
 
 }
