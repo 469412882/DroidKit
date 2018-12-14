@@ -45,7 +45,7 @@ public class BindingRecyclerViewActivity extends BaseBindingActivity<ActivityRec
     protected void initBindingViews() {
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerview.addItemDecoration(new RecycleViewItemDiver(this, LinearLayoutManager.HORIZONTAL));
-        binding.container.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        binding.container.setOnRefreshListener(new RefreshContainer.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 viewModel.requestRepository(false);

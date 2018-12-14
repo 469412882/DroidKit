@@ -52,7 +52,7 @@ public class RecyclerViewActivity extends BaseActivity {
             }
         });
         container = (RefreshContainer) findViewById(R.id.container);
-        container.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        container.setOnRefreshListener(new RefreshContainer.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 loadData(false);

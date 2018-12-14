@@ -102,10 +102,9 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.DataBindingHomeViewActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.PullRefreshRecyclerViewActivity"
-            android:screenOrientation="portrait" />
         <activity android:name=".ui.activity.BindingImageViewActivity"
             android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

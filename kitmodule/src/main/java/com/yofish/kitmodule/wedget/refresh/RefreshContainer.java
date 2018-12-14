@@ -2,7 +2,6 @@ package com.yofish.kitmodule.wedget.refresh;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -14,6 +13,10 @@ import android.widget.ListView;
 import com.yofish.kitmodule.R;
 import com.yofish.kitmodule.baseAdapter.recyclerview.CommonAdapter;
 import com.yofish.kitmodule.baseAdapter.recyclerview.wrapper.HeaderAndFooterWrapper;
+import com.yofish.kitmodule.wedget.refresh.pull2Refresh.PtrDefaultHandler;
+import com.yofish.kitmodule.wedget.refresh.pull2Refresh.PtrFrameLayout;
+import com.yofish.kitmodule.wedget.refresh.pull2Refresh.PtrHandler;
+import com.yofish.kitmodule.wedget.refresh.pull2Refresh.PtrMetialFrameLayout;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 
@@ -23,7 +26,7 @@ import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
  * Created by hch on 2017/6/21. modify by hch on 2017/9/6.
  */
 
-public class RefreshContainer extends SwipeRefreshLayout {
+public class RefreshContainer extends PtrMetialFrameLayout {
 
     private enum ScrollableViewType {
         LISTVIEW, RECYCLEVIEW, GRIDVIEW, SCROLLVIEW
@@ -77,7 +80,7 @@ public class RefreshContainer extends SwipeRefreshLayout {
             supportLoadMore = array.getBoolean(R.styleable.RefreshContainer_support_loadmore, false);
             array.recycle();
         }
-        setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+       // setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
     }
 
     /**
@@ -90,21 +93,34 @@ public class RefreshContainer extends SwipeRefreshLayout {
     }
 
     public void setAutoRefreshing() {
-        post(new Runnable() {
+        postDelayed(new Runnable() {
             @Override
             public void run() {
-                setRefreshing(true);
+                autoRefresh(true);
                 if (mRefreshListener != null) {
                     mRefreshListener.onRefresh();
                 }
             }
-        });
+        },100);
+
+        setPtrRefresh();
     }
 
-    @Override
-    public void setOnRefreshListener(OnRefreshListener listener) {
-        super.setOnRefreshListener(listener);
-        mRefreshListener = listener;
+    private void setPtrRefresh() {
+        setPtrHandler(new PtrHandler() {
+
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                if (mRefreshListener != null) {
+                    mRefreshListener.onRefresh();
+                }
+            }
+
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+            }
+        });
     }
 
     @Override
@@ -225,7 +241,7 @@ public class RefreshContainer extends SwipeRefreshLayout {
      * 加载完成
      */
     public void loadComplete() {
-        setRefreshing(false);
+        refreshComplete();
         shouldLoadMore = false;
         if (wrapper != null) {
             wrapper.notifyDataSetChanged();
@@ -239,6 +255,15 @@ public class RefreshContainer extends SwipeRefreshLayout {
 
     public void setOnLoadMoreListener(OnLoadMoreListener loadListener) {
         mLoadMoreListener = loadListener;
+    }
+
+
+    public interface OnRefreshListener {
+        void onRefresh();
+    }
+
+    public void setOnRefreshListener(OnRefreshListener loadListener) {
+        mRefreshListener = loadListener;
     }
 
 }

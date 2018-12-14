@@ -8,7 +8,9 @@ import com.yofish.kitmodule.R;
 import com.yofish.kitmodule.wedget.refresh.pull2Refresh.header.MaterialHeader;
 import com.yofish.kitmodule.wedget.refresh.pull2Refresh.util.PtrLocalDisplay;
 
-
+/**
+ * MetialDesign风格的下拉刷新
+ */
 public class PtrMetialFrameLayout extends PtrFrameLayout
 {
     private MaterialHeader materialHeader;

@@ -162,7 +162,7 @@ public class UIActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(new Intent(this, RecyclerViewActivity.class));
                 break;
             case R.id.pullrv:
-                startActivity(new Intent(this, PullRefreshRecyclerViewActivity.class));
+                //startActivity(new Intent(this, PullRefreshRecyclerViewActivity.class));
                 break;
         }
     }
