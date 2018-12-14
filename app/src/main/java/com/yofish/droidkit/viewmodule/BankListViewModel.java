@@ -14,6 +14,7 @@ import com.yofish.droidkit.viewmodule.item.BankItemViewModel;
 import com.yofish.kitmodule.baseAdapter.recyclerview.DBRvAdapter;
 import com.yofish.kitmodule.base_component.repository.IRepositoryCallBack;
 import com.yofish.kitmodule.base_component.viewmodel.BaseViewModel;
+import com.yofish.kitmodule.util.DataBindingHelper;
 import com.yofish.kitmodule.util.PagerInfo;
 
 import java.util.ArrayList;
@@ -50,12 +51,17 @@ public class BankListViewModel extends BaseViewModel {
         repository.setCallBack(new IRepositoryCallBack<BankData>() {
             @Override
             public void onSuccess(BankData bankData) {
-                List<BankItemViewModel> itemViewModels = new ArrayList<>();
+                /*List<BankItemViewModel> itemViewModels = new ArrayList<>();
                 for (BankInfoBean bankInfoBean : bankData.getBankList()) {
                     BankItemViewModel model = new BankItemViewModel(BankListViewModel.this);
                     model.bankName.set(bankInfoBean.getBankName());
                     model.bankIconURL.set(bankInfoBean.getBankIconURL());
                     itemViewModels.add(model);
+                }*/
+                List<BankItemViewModel> itemViewModels = DataBindingHelper.parseBeanList2VMList(bankData.getBankList(),
+                        BankItemViewModel.class, BankListViewModel.this);
+                if (itemViewModels == null || itemViewModels.size() <= 0) {
+                    setNoData();
                 }
                 if (isLoadMore) {
                     mAdapter.get().addData(itemViewModels);
