@@ -9,44 +9,76 @@
 
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            app:bindNetImg="@{imgVM.imgUrl}"
-            app:imgShape="@{2}"
-            app:bindNetImgListener="@{imgVM.imgloaderListener}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="120dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="Button"
-            android:onClick="@{imgVM.imgClick}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                app:bindNetImg="@{imgVM.imgUrl}"
+                app:imgShape="@{2}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Button"
+                    android:onClick="@{imgVM.imgClick}"
+                    />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:onClickCommand="@{imgVM.clickBtn2}"
+                    app:intervalTimes="@{2000}"
+                    onLongClickCommand="@{imgVM.longClickBtn2}"
+                    android:text="Button1"
+                    tools:layout_editor_absoluteY="461dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.yofish.kitmodule.wedget.refresh.RefreshContainer
+            android:id="@+id/refresh"
+            app:onRefreshCommand="@{imgVM.onRefresh}"
+            app:onLoadMoreCommand="@{imgVM.onLoadMore}"
+            app:support_loadmore="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ListView
+                app:bindAdapter="@{imgVM.listAdapter}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
 
-    </android.support.constraint.ConstraintLayout>
+            </ListView>
+
+        </com.yofish.kitmodule.wedget.refresh.RefreshContainer>
+
+
+
+    </LinearLayout>
+
+
 
 </layout>
 

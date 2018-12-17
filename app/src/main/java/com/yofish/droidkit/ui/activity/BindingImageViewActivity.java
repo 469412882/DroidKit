@@ -28,4 +28,10 @@ public class BindingImageViewActivity extends BaseBindingActivity<ActivityDatabi
     protected int setLayoutId(Bundle savedInstanceState) {
         return R.layout.activity_databinding_img;
     }
+
+    @Override
+    public void loadingComplete() {
+        super.loadingComplete();
+        binding.refresh.loadComplete();
+    }
 }
