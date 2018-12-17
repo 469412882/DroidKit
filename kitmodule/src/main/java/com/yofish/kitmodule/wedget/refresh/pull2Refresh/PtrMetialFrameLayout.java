@@ -44,6 +44,20 @@ public class PtrMetialFrameLayout extends PtrFrameLayout
         setPinContent(keepHeader);
         setHeaderView(materialHeader);
         addPtrUIHandler(materialHeader);
+
+        initAutoRefresh();
+    }
+
+    private void initAutoRefresh() {
+        /**
+         * 设置自动刷新头部
+         */
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                autoRefresh(true);
+            }
+        },100);
     }
 
     public MaterialHeader getHeader()

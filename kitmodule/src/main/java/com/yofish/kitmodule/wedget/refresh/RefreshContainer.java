@@ -93,20 +93,6 @@ public class RefreshContainer extends PtrMetialFrameLayout {
     }
 
     public void setAutoRefreshing() {
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                autoRefresh(true);
-                if (mRefreshListener != null) {
-                    mRefreshListener.onRefresh();
-                }
-            }
-        },100);
-
-        setPtrRefresh();
-    }
-
-    private void setPtrRefresh() {
         setPtrHandler(new PtrHandler() {
 
             @Override
