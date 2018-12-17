@@ -99,6 +99,13 @@ public abstract class BaseBindingActivity<V extends ViewDataBinding, VM extends 
                 showSnackBar(s, getWindow().getDecorView());
             }
         });
+        //snackBar显示
+        viewModel.getUiLiveData().getToolBarTitleEvent().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                setToolbarTitle(s);
+            }
+        });
         //页数更新
         viewModel.getUiLiveData().getUpdatePageEvent().observe(this, new Observer<PagerInfo>() {
             @Override

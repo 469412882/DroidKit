@@ -69,6 +69,7 @@ public class BankListViewModel extends BaseViewModel {
                 } else {
                     mAdapter.get().resetData(itemViewModels);
                 }
+                setToolbarTitle("VM Binding RecyclerView");
             }
 
             @Override

@@ -268,4 +268,13 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IUIHan
 
     }
 
+    /**
+     * 设置toolbar
+     *
+     * @param title title
+     */
+    public void setToolbarTitle(String title) {
+        initToolbar(title);
+    }
+
 }

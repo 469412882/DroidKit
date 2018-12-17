@@ -32,6 +32,7 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseVie
     public ObservableField<String> nodataHint = new ObservableField<>();
     public ObservableField<Drawable> netErrRes = new ObservableField<>();
     public ObservableField<Drawable> nodataRes = new ObservableField<>();
+    public ObservableField<String> toolbarTitle = new ObservableField<>("");
 
     public BaseViewModel(@NonNull Application application) {
         super(application);
@@ -75,6 +76,18 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseVie
             return;
         }
         uiLiveData.snackBarEvent.postValue(title);
+    }
+
+    /**
+     * 修改toolbar的title
+     *
+     * @param title
+     */
+    public void setToolbarTitle(String title) {
+        if (uiLiveData == null) {
+            return;
+        }
+        uiLiveData.toolBarTitleEvent.postValue(title);
     }
 
     /**
@@ -175,6 +188,10 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseVie
          * 加载完成
          */
         private SingleLiveEvent loadingComplete;
+        /**
+         * 设置toolbar的title
+         */
+        private SingleLiveEvent<String> toolBarTitleEvent;
 
         public SingleLiveEvent<String> getShowDialogEvent() {
             return showDialogEvent = createLiveData(showDialogEvent);
@@ -182,6 +199,10 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseVie
 
         public SingleLiveEvent<String> getSnackBarEvent() {
             return snackBarEvent = createLiveData(snackBarEvent);
+        }
+
+        public SingleLiveEvent<String> getToolBarTitleEvent() {
+            return toolBarTitleEvent = createLiveData(toolBarTitleEvent);
         }
 
         public SingleLiveEvent<PagerInfo> getUpdatePageEvent() {

@@ -24,7 +24,7 @@ public class BindingRecyclerViewActivity extends BaseBindingActivity<ActivityRec
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initToolbar("Binding RecyclerView");
+        initToolbar("");
     }
 
     @Override
