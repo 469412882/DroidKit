@@ -4,6 +4,7 @@
     android:id="@+id/droidkit_toolbar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/common_toolbar_height"
+    app:titleMarginEnd="@dimen/common_margin"
     app:theme="@style/DroidKitTheme.ToolbarTheme">
 
 </com.yofish.kitmodule.wedget.CommonToolbar>

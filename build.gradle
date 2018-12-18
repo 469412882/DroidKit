@@ -20,6 +20,9 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url 'http://10.0.52.88:8081/repository/yofish-mall-public/'
+        }
 
         flatDir {
             dirs 'libs'

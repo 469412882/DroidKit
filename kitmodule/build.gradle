@@ -51,13 +51,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support:multidex:1.0.3'
     implementation "com.android.support:design:${cfgs.SUPPORT_LIB_VERSION}"
-    /*rx-retrofit-绑定生命页面周期*/
-    implementation 'com.trello:rxlifecycle:1.0'
-    implementation 'com.trello:rxlifecycle-components:1.0'
     //json
-    implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'org.greenrobot:greendao:3.2.2'
-    implementation 'net.zetetic:android-database-sqlcipher:3.5.7'
     implementation "com.android.support:recyclerview-v7:${cfgs.SUPPORT_LIB_VERSION}"
     implementation 'com.nineoldandroids:library:2.4.0'
     /* router */
@@ -67,7 +61,30 @@ dependencies {
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'android.arch.persistence.room:runtime:1.1.1'
     annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
-    implementation "io.reactivex.rxjava2:rxjava:2.2.4"
-    api project(':netmodule')
-    api project(':imagemodule')
+    //rxjava
+    api "io.reactivex.rxjava2:rxjava:2.2.4"
+
+//    api project(':netmodule')
+    api 'com.yofish.mall:netmodule:1.0.0'
+    api 'com.yofish.mall:imagemodule:1.0.0'
+//    api project(':imagemodule')
+}
+
+// 在gradle的第一行加
+apply plugin: 'maven'
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+
+            repository(url: "http://10.0.52.88:8081/repository/yofish-mail-release/") {
+                authentication(userName: "admin", password: "admin123")
+            }
+            pom.version = "1.0.0"
+            pom.artifactId = "basekit"
+            pom.groupId = "com.yofish.mall"
+            pom.packaging = 'aar'
+        }
+    }
 }

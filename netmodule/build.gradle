@@ -57,3 +57,22 @@ dependencies {
     implementation 'org.greenrobot:greendao:3.2.2'
     implementation 'net.zetetic:android-database-sqlcipher:3.5.7'
 }
+
+// 在gradle的第一行加
+apply plugin: 'maven'
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+
+            repository(url: "http://10.0.52.88:8081/repository/yofish-mail-release/") {
+                authentication(userName: "admin", password: "admin123")
+            }
+            pom.version = "1.0.0"
+            pom.artifactId = "netmodule"
+            pom.groupId = "com.yofish.mall"
+            pom.packaging = 'aar'
+        }
+    }
+}
