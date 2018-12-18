@@ -55,7 +55,9 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:${cfgs.SUPPORT_LIB_VERSION}"
     implementation 'com.nineoldandroids:library:2.4.0'
     /* router */
-    implementation "com.alibaba:arouter-api:${cfgs.arouter_api_version}"
+    implementation("com.alibaba:arouter-api:${cfgs.arouter_api_version}"){
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
     annotationProcessor "com.alibaba:arouter-compiler:${cfgs.arouter_compiler_version}"
     /* lifecycle livedata */
     implementation 'android.arch.lifecycle:extensions:1.1.1'
@@ -81,7 +83,7 @@ uploadArchives {
             repository(url: "http://10.0.52.88:8081/repository/yofish-mail-release/") {
                 authentication(userName: "admin", password: "admin123")
             }
-            pom.version = "1.0.0"
+            pom.version = "1.0.1"
             pom.artifactId = "basekit"
             pom.groupId = "com.yofish.mall"
             pom.packaging = 'aar'

@@ -47,5 +47,8 @@
         <attr name="max_percent" format="integer" />
         <attr name="percent_start_angle" format="integer" />
     </declare-styleable>
+    <declare-styleable name="CommonToolbar">
+        <attr name="titleCenter" format="boolean" />
+    </declare-styleable>
 
 </resources>

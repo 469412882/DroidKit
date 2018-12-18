@@ -4,6 +4,7 @@ package com.yofish.kitmodule.wedget;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.TintTypedArray;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -34,15 +35,21 @@ public class CommonToolbar extends Toolbar {
 
     public CommonToolbar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(attrs, defStyleAttr);
     }
 
-    private void init(){
+    private void init(AttributeSet attrs, int defStyleAttr){
         this.setBackgroundColor(this.getResources().getColor(R.color.colorToolbarBg));
         this.setPadding(0, this.getResources().getDimensionPixelSize(R.dimen.common_toolbar_padding_top), 0, 0);
         this.setMinimumHeight(this.getResources().getDimensionPixelSize(R.dimen.common_toolbar_height));
         this.setPopupTheme(R.style.DroidKitTheme_ToolbarOverflowMenuStyle);
-        gravity = Gravity.CENTER_VERTICAL;
+        TintTypedArray array = TintTypedArray.obtainStyledAttributes(getContext(), attrs, R.styleable.CommonToolbar, defStyleAttr, 0);
+        boolean titleCenter = array.getBoolean(R.styleable.CommonToolbar_titleCenter, false);
+        if (titleCenter) {
+            gravity = Gravity.CENTER;
+        } else {
+            gravity = Gravity.CENTER_VERTICAL;
+        }
     }
 
     public void notFullScreen(){

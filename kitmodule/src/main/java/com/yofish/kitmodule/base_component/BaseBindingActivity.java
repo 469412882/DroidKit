@@ -37,7 +37,9 @@ public abstract class BaseBindingActivity<V extends ViewDataBinding, VM extends 
 
     protected abstract int initVariableId();
 
-    protected abstract VM initViewModel();
+    protected VM initViewModel(){
+        return null;
+    }
 
 
 
