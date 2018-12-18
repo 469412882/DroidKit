@@ -104,6 +104,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.BindingImageViewActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.PagerSlidingActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

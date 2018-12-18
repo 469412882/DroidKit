@@ -102,12 +102,12 @@
             android:text="recyclerview" />
 
         <Button
-            android:id="@+id/pullrv"
+            android:id="@+id/pagersliding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="@dimen/common_margin"
-            android:text="头部下拉刷新" />
+            android:text="PagerSlid" />
 
 
     </LinearLayout>
