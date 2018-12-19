@@ -83,7 +83,7 @@ uploadArchives {
             repository(url: "http://10.0.52.88:8081/repository/yofish-mail-release/") {
                 authentication(userName: "admin", password: "admin123")
             }
-            pom.version = "1.0.1"
+            pom.version = "1.0.2"
             pom.artifactId = "basekit"
             pom.groupId = "com.yofish.mall"
             pom.packaging = 'aar'

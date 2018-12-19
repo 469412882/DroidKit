@@ -85,8 +85,20 @@ public class NetWorkActivity extends BaseActivity implements View.OnClickListene
 
     private void requestData() {
         NetClient.newBuilder(this).baseUrl("http://credit.youyuwo.com/notcontrol/manage/")
-                .method("queryCardImportBankList.go").callBack(new ProgressCallBack<BankData>() {
-                    @Override
+                .method("queryCardImportBankList.go").callBack(new BaseCallBack<BankData>() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                showLoadingDialog(true);
+            }
+
+            @Override
+            public void onComplete() {
+                super.onComplete();
+                dismissLoadingDialog();
+            }
+
+            @Override
                     public void onSuccess(BankData bankData) {
                         adapter.resetData(bankData.getBankList());
                         LogUtils.d("请求银行列表成功");

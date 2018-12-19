@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- 应用的主要色调，actionBar默认使用该颜色 -->
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#F62756</color>
     <!-- 应用的主要暗色调，statusBarColor默认使用该颜色 -->
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#dd0737</color>
     <!-- 一般控件的选种效果默认采用该颜色,如progressBar的进度颜色、dialog的按钮颜色、checkbox的选中背景色 -->
     <color name="colorAccent">#FF4081</color>
     <!--  -->
@@ -30,8 +30,14 @@
     <color name="colorControlHighlight">#ff009688</color>
     <!-- 控件选中时的颜色，默认使用colorAccent -->
     <color name="colorControlActivated">#ff009688</color>
+
     <!-- 默认按钮的背景颜色 -->
-    <color name="colorButtonNormal">#ff009688</color>
+    <color name="colorButtonNormal">#F62756</color>
+    <!-- 默认按钮的背景按下颜色 -->
+    <color name="colorButtonPressed">#dd0737</color>
+    <!-- 按钮不可点击颜色 -->
+    <color name="colorBtnDisableBg">#Fba9bb</color>
+
     <!-- Button，textView的文字颜色 -->
     <color name="textColor">#ff009688</color>
     <!-- RadioButton checkbox等控件的文字 -->
@@ -44,5 +50,6 @@
     <color name="colorRipple">#C3C3C3</color>
 
     <color name="colorTextTitle">#333333</color>
+    <color name="colorTextContent">#999999</color>
 
 </resources>

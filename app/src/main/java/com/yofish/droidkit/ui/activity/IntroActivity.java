@@ -255,8 +255,8 @@ public class IntroActivity extends BaseActivity implements View.OnClickListener 
 
     private void showBtn() {
         //显示立即体验按钮
-        experienceNowView.setAnimation(AnimationUtils.loadAnimation(
-                IntroActivity.this, R.anim.out_from_bottom_anim));
+//        experienceNowView.setAnimation(AnimationUtils.loadAnimation(
+//                IntroActivity.this, R.anim.out_from_bottom_anim));
         experienceNowView.setVisibility(View.VISIBLE);
     }
 

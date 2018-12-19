@@ -113,6 +113,26 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseVie
     }
 
     /**
+     * 显示加载对话框
+     */
+    public void showLoadingDialog(boolean cancleable){
+        if (uiLiveData == null) {
+            return;
+        }
+        uiLiveData.showLoadingDialogEvent.postValue(cancleable);
+    }
+
+    /**
+     * 隐藏加载对话框
+     */
+    public void dismissLoadingDialog(){
+        if (uiLiveData == null) {
+            return;
+        }
+        uiLiveData.dismissLoadingDialogEvent.call();
+    }
+
+    /**
      * 加载完成
      */
     public void loadingComplete() {
@@ -165,6 +185,14 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseVie
          */
         private SingleLiveEvent dismissDialogEvent;
         /**
+         * 显示加载弹窗
+         */
+        private SingleLiveEvent<Boolean> showLoadingDialogEvent;
+        /**
+         * 隐藏加载弹窗
+         */
+        private SingleLiveEvent dismissLoadingDialogEvent;
+        /**
          * 显示snackBar
          */
         private SingleLiveEvent<String> snackBarEvent;
@@ -211,6 +239,14 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseVie
 
         public SingleLiveEvent getDismissDialogEvent() {
             return dismissDialogEvent = createLiveData(dismissDialogEvent);
+        }
+
+        public SingleLiveEvent<Boolean> getShowLoadingDialogEvent(){
+            return showLoadingDialogEvent = createLiveData(showLoadingDialogEvent);
+        }
+
+        public SingleLiveEvent getDismissLoadingDialogEvent(){
+            return dismissLoadingDialogEvent = createLiveData(dismissLoadingDialogEvent);
         }
 
         public SingleLiveEvent<Map<String, Object>> getStartActivityEvent() {

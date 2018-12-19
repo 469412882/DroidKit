@@ -14,7 +14,7 @@
         android:textSize="18sp"
         android:gravity="center"
         android:textColor="@android:color/white"
-        android:background="@drawable/common_btn_bg_solid"/>
+        android:background="@drawable/btn_bg_solid"/>
 
 
     <TextView

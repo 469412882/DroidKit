@@ -63,7 +63,9 @@ dependencies {
     /*glide*/
     implementation 'com.github.bumptech.glide:glide:4.0.0-RC1'
     /* router */
-    implementation "com.alibaba:arouter-api:${cfgs.arouter_api_version}"
+    implementation("com.alibaba:arouter-api:${cfgs.arouter_api_version}"){
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
     annotationProcessor "com.alibaba:arouter-compiler:${cfgs.arouter_compiler_version}"
     implementation project(':kitmodule')
     // 支付宝 SDK AAR 包所需的配置

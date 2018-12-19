@@ -44,6 +44,7 @@ public class UIActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.listview).setOnClickListener(this);
         findViewById(R.id.recyclerview).setOnClickListener(this);
         findViewById(R.id.pagersliding).setOnClickListener(this);
+        findViewById(R.id.login_btn).setOnClickListener(this);
         findViewById(R.id.elevation_view).setOnTouchListener(new View.OnTouchListener() {
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override

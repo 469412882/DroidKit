@@ -1,5 +1,6 @@
 package com.yofish.kitmodule.base_component;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -231,6 +232,16 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IUIHan
      */
     public void dismissAlertDialog() {
         uiHandleWrapper.dismissAlertDialog();
+    }
+
+    @Override
+    public void showLoadingDialog(boolean cancelable) {
+        uiHandleWrapper.showLoadingDialog(cancelable);
+    }
+
+    @Override
+    public void dismissLoadingDialog() {
+        uiHandleWrapper.dismissLoadingDialog();
     }
 
     /**

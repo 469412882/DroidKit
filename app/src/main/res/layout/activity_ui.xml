@@ -112,4 +112,16 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="登录"
+        android:gravity="center"
+        android:background="@drawable/common_btn_bg_solid"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:layout_marginRight="@dimen/common_margin"/>
+
 </LinearLayout>

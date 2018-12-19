@@ -1,5 +1,6 @@
 package com.yofish.kitmodule.base_component;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,7 +20,10 @@ import com.yofish.kitmodule.util.PagerInfo;
 public class UIHandleImpl implements IUIHandle {
 
     private Context mContext;
+    /** 提示对话框 */
     private AlertDialog mAlertDialog;
+    /** 请求时的对话框 */
+    private ProgressDialog mLoadingDialog;
 
     public UIHandleImpl(Context context){
         this.mContext = context;
@@ -51,6 +55,24 @@ public class UIHandleImpl implements IUIHandle {
     public void dismissAlertDialog() {
         if (mAlertDialog != null && mAlertDialog.isShowing()) {
             mAlertDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void showLoadingDialog(boolean cancleable) {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = new ProgressDialog(mContext);
+        }
+        mLoadingDialog.setCancelable(cancleable);
+        if (!mLoadingDialog.isShowing()) {
+            mLoadingDialog.show();
+        }
+    }
+
+    @Override
+    public void dismissLoadingDialog() {
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
+            mLoadingDialog.dismiss();
         }
     }
 

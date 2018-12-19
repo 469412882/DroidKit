@@ -37,12 +37,18 @@ public abstract class BaseBindingFragment<V extends ViewDataBinding, VM extends 
 
     protected abstract int initVariableId();
 
-    protected abstract VM initViewModel();
+    protected void initBindingViews() {
+
+    }
+
+    protected VM initViewModel(){
+        return null;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.setContentView(getActivity(), setLayoutId(savedInstanceState));
+        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), setLayoutId(savedInstanceState), container, false);
         viewModelId = initVariableId();
         viewModel = initViewModel();
         if (viewModel == null) {
@@ -67,6 +73,7 @@ public abstract class BaseBindingFragment<V extends ViewDataBinding, VM extends 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         registorUIChangeLiveDataCallBack();
+        initBindingViews();
     }
 
     //注册ViewModel与View的契约UI回调事件
@@ -96,6 +103,18 @@ public abstract class BaseBindingFragment<V extends ViewDataBinding, VM extends 
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 dismissAlertDialog();
+            }
+        });
+        viewModel.getUiLiveData().getShowLoadingDialogEvent().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                showLoadingDialog(aBoolean);
+            }
+        });
+        viewModel.getUiLiveData().getDismissLoadingDialogEvent().observe(this, new Observer() {
+            @Override
+            public void onChanged(@Nullable Object o) {
+                dismissLoadingDialog();
             }
         });
         //跳入新页面

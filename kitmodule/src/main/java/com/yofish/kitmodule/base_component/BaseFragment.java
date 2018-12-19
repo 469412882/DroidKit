@@ -1,5 +1,6 @@
 package com.yofish.kitmodule.base_component;
 
+import android.app.ProgressDialog;
 import android.arch.lifecycle.HolderFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -116,6 +117,16 @@ public abstract class BaseFragment extends RxFragment implements IUIHandle {
 
     public void dismissAlertDialog() {
         uiHandleWrapper.dismissAlertDialog();
+    }
+
+    @Override
+    public void showLoadingDialog(boolean cancelable) {
+        uiHandleWrapper.showLoadingDialog(cancelable);
+    }
+
+    @Override
+    public void dismissLoadingDialog() {
+        uiHandleWrapper.dismissLoadingDialog();
     }
 
     public void showSnackBar(String content, View anchor){

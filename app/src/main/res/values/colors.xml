@@ -4,15 +4,17 @@
     <color name="mainTabDefColor">#999999</color>
     <color name="mainTabFoucesColor">#00afff</color>
     <!-- 应用的主要色调，actionBar默认使用该颜色 -->
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#F62756</color>
     <!-- 应用的主要暗色调，statusBarColor默认使用该颜色 -->
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#dd0737</color>
     <!-- 一般控件的选种效果默认采用该颜色,如progressBar的进度颜色、dialog的按钮颜色、checkbox的选中背景色 -->
     <color name="colorAccent">#FF4081</color>
     <!--  -->
     <color name="colorMenuItemText">#363636</color>
     <!--  -->
     <color name="colorToolbarPrimary">#FFFFFF</color>
+    <!--  -->
+    <color name="colorToolbarBg">#3F51B5</color>
     <!--  -->
     <color name="material_grey">#ff424242</color>
     <!-- 状态栏颜色，默认使用colorPrimaryDark -->
@@ -31,8 +33,14 @@
     <color name="colorControlHighlight">#ff009688</color>
     <!-- 控件选中时的颜色，默认使用colorAccent -->
     <color name="colorControlActivated">#ff009688</color>
+
     <!-- 默认按钮的背景颜色 -->
-    <color name="colorButtonNormal">#ff009688</color>
+    <color name="colorButtonNormal">#F62756</color>
+    <!-- 默认按钮的背景按下颜色 -->
+    <color name="colorButtonPressed">#dd0737</color>
+    <!-- 按钮不可点击颜色 -->
+    <color name="colorBtnDisableBg">#Fba9bb</color>
+
     <!-- Button，textView的文字颜色 -->
     <color name="textColor">#ff009688</color>
     <!-- RadioButton checkbox等控件的文字 -->
@@ -43,4 +51,7 @@
     <color name="colorDivider">#ffe0e0e0</color>
     <!-- 水波纹 color -->
     <color name="colorRipple">#C3C3C3</color>
+
+    <color name="colorTextTitle">#333333</color>
+    <color name="colorTextContent">#999999</color>
 </resources>

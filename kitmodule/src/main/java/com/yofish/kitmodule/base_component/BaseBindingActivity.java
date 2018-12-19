@@ -122,6 +122,18 @@ public abstract class BaseBindingActivity<V extends ViewDataBinding, VM extends 
                 dismissAlertDialog();
             }
         });
+        viewModel.getUiLiveData().getShowLoadingDialogEvent().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                showLoadingDialog(aBoolean);
+            }
+        });
+        viewModel.getUiLiveData().getDismissLoadingDialogEvent().observe(this, new Observer() {
+            @Override
+            public void onChanged(@Nullable Object o) {
+                dismissLoadingDialog();
+            }
+        });
         //跳入新页面
         viewModel.getUiLiveData().getStartActivityEvent().observe(this, new Observer<Map<String, Object>>() {
             @Override

@@ -15,6 +15,10 @@ public interface IUIHandle {
 
     void dismissAlertDialog();
 
+    void showLoadingDialog(boolean cancelable);
+
+    void dismissLoadingDialog();
+
     void showToast(String msg);
 
     void showSnackBar(String content, View anchor);
