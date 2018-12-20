@@ -41,6 +41,8 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
@@ -54,6 +56,10 @@ public class Utility {
     public static Pattern idNumPattern = Pattern.compile("^[1-9][0-7]\\d{4}((19\\d{2}(0[13-9]|1[012])(0[1-9]|[12]\\d|30))|(19\\d{2}(0[13578]|1[02])31)|(19\\d{2}02(0[1-9]|1\\d|2[0-8]))|(19([13579][26]|[2468][048]|0[48])0229))\\d{3}(\\d|X|x)?$");
     public static String[] ID_JIAO_YAN = new String[]{"1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"};
     public static int[] ID_XI_SHU = new int[]{7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2};
+    /** 多线程池 */
+    public static ExecutorService CACHED_THREADPOOL = Executors.newCachedThreadPool();
+    /** 单线程池 */
+    public static ExecutorService SINGLE_THREADPOOL = Executors.newSingleThreadExecutor();
 
     public static File saveFile(InputStream inputStream, String fileName) {
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
