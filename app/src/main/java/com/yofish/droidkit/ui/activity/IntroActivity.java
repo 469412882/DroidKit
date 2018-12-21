@@ -25,6 +25,7 @@ import com.yofish.droidkit.ui.fragment.IntroFragment;
 import com.yofish.kitmodule.base_component.BaseActivity;
 import com.yofish.kitmodule.util.AppSharedPrefrences;
 import com.yofish.kitmodule.util.LogUtils;
+import com.yofish.kitmodule.util.NetClient;
 import com.yofish.kitmodule.util.Utility;
 import com.yofish.kitmodule.wedget.CustomProgressBar;
 import com.yofish.droidkit.R;
@@ -32,7 +33,6 @@ import com.yofish.droidkit.repository.bean.BannerRouterBean;
 import com.yofish.droidkit.repository.bean.StartInfoBean;
 import com.yofish.droidkit.utils.AppSwitch;
 import com.nineoldandroids.animation.ValueAnimator;
-import com.yofish.netmodule.NetClient;
 import com.yofish.netmodule.callback.BaseCallBack;
 
 import java.util.HashMap;

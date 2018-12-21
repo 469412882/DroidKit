@@ -65,9 +65,11 @@ dependencies {
     annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
     //rxjava
     api "io.reactivex.rxjava2:rxjava:2.2.4"
+    //eventbus
+    implementation 'org.greenrobot:eventbus:3.1.1'
 
 //    api project(':netmodule')
-    api 'com.yofish.mall:netmodule:1.0.1'
+    api 'com.yofish.mall:netmodule:1.0.2'
     api 'com.yofish.mall:imagemodule:1.0.0'
 //    api project(':imagemodule')
 }
@@ -83,7 +85,7 @@ uploadArchives {
             repository(url: "http://10.0.52.88:8081/repository/yofish-mail-release/") {
                 authentication(userName: "admin", password: "admin123")
             }
-            pom.version = "1.0.4"
+            pom.version = "1.0.5"
             pom.artifactId = "basekit"
             pom.groupId = "com.yofish.mall"
             pom.packaging = 'aar'

@@ -185,6 +185,7 @@ public class RequestConfig {
         if (headers == null) {
             return;
         }
+        this.headers.clear();
         this.headers.putAll(headers);
     }
 

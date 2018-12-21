@@ -8,11 +8,11 @@ import android.widget.ListView;
 import com.yofish.kitmodule.baseAdapter.abslistview.CommonAdapter;
 import com.yofish.kitmodule.baseAdapter.abslistview.ViewHolder;
 import com.yofish.kitmodule.base_component.BaseActivity;
+import com.yofish.kitmodule.util.NetClient;
 import com.yofish.kitmodule.wedget.refresh.RefreshContainer;
 import com.yofish.droidkit.R;
 import com.yofish.droidkit.repository.bean.BankData;
 import com.yofish.droidkit.repository.bean.BankInfoBean;
-import com.yofish.netmodule.NetClient;
 import com.yofish.netmodule.callback.BaseCallBack;
 
 /**

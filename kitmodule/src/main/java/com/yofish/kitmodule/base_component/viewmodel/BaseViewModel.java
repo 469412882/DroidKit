@@ -153,6 +153,16 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseVie
         }
         startActivity(clz, null);
     }
+    /**
+     * finish
+     */
+    public void doFinish() {
+        if (uiLiveData == null) {
+            return;
+        }
+        uiLiveData.finishEvent.call();
+    }
+
 
     /**
      * 跳转页面

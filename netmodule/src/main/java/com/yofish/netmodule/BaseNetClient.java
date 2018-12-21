@@ -20,7 +20,7 @@ import java.util.Map;
  * Created by hch on 2017/6/28.
  */
 
-public class NetClient {
+public class BaseNetClient {
 
     public static Builder newBuilder(Context context){
         GlobalAppContext.setContext(context);

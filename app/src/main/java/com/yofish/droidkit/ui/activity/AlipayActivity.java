@@ -16,8 +16,8 @@ import com.yofish.droidkit.R;
 import com.yofish.droidkit.repository.bean.PayResult;
 import com.yofish.kitmodule.base_component.BaseActivity;
 import com.yofish.kitmodule.util.LogUtils;
-import com.yofish.netmodule.NetClient;
-import com.yofish.netmodule.callback.ProgressCallBack;
+import com.yofish.kitmodule.util.NetClient;
+import com.yofish.netmodule.callback.BaseCallBack;
 import com.yofish.netmodule.datatype.AllJsonObject;
 
 import java.util.HashMap;
@@ -99,7 +99,7 @@ public class AlipayActivity extends BaseActivity implements View.OnClickListener
                         .baseUrl("http://pqq.vipgz1.idcfengye.com/payment/")
                         .method("pay")
                         .params(params)
-                        .callBack(new ProgressCallBack<AllJsonObject>() {
+                        .callBack(new BaseCallBack<AllJsonObject>() {
                             @Override
                             public void onSuccess(AllJsonObject result) {
                                 String orderInfo = result.getResponseBodyJson().getString("data");
@@ -112,7 +112,6 @@ public class AlipayActivity extends BaseActivity implements View.OnClickListener
 
                             @Override
                             public void onFailed(String code, String errors) {
-                                super.onFailed(code, errors);
                                 mPayResult.setText(errors);
                             }
                         }).sendPost();
@@ -147,7 +146,7 @@ public class AlipayActivity extends BaseActivity implements View.OnClickListener
                 .baseUrl("http://pqq.vipgz1.idcfengye.com/payment/")
                 .method("rece")
                 .params(payResult)
-                .callBack(new ProgressCallBack<AllJsonObject>() {
+                .callBack(new BaseCallBack<AllJsonObject>() {
                     @Override
                     public void onSuccess(AllJsonObject result) {
                         showToast("同步后台成功");
@@ -155,7 +154,6 @@ public class AlipayActivity extends BaseActivity implements View.OnClickListener
 
                     @Override
                     public void onFailed(String code, String errors) {
-                        super.onFailed(code, errors);
                         showToast("同步后台失败");
                     }
                 }).sendPost();

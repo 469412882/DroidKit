@@ -1,13 +1,13 @@
 package com.yofish.kitmodule.router;
 
 import android.content.Context;
-import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.annotation.Interceptor;
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback;
 import com.alibaba.android.arouter.facade.template.IInterceptor;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.yofish.kitmodule.loginUtil.AppLoginMgr;
 
 /**
  * 登录拦截器
@@ -29,7 +29,7 @@ public class LoginInterceptor implements IInterceptor {
             if (AppLoginMgr.getInstance().isLogin()) {
                 callback.onContinue(postcard);
             }else {
-                AppLoginMgr.getInstance().tologinRouter(mContext,postcard.getPath(),postcard.getExtras());
+                AppLoginMgr.getInstance().doTargetRouter(mContext,postcard.getPath(),postcard.getExtras());
             }
 
         } else {

@@ -2,7 +2,7 @@ package com.yofish.kitmodule.base_component.repository;
 
 import android.content.Context;
 
-import com.yofish.netmodule.NetClient;
+import com.yofish.kitmodule.util.NetClient;
 import com.yofish.netmodule.callback.BaseCallBack;
 
 import java.util.Map;

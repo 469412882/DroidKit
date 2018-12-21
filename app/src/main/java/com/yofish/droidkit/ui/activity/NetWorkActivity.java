@@ -20,13 +20,12 @@ import com.yofish.kitmodule.permission.PermissionListener;
 import com.yofish.kitmodule.permission.Rationale;
 import com.yofish.kitmodule.permission.RationaleListener;
 import com.yofish.kitmodule.util.LogUtils;
+import com.yofish.kitmodule.util.NetClient;
 import com.yofish.kitmodule.util.Utility;
 import com.yofish.droidkit.R;
 import com.yofish.droidkit.repository.bean.BankData;
 import com.yofish.droidkit.repository.bean.BankInfoBean;
-import com.yofish.netmodule.NetClient;
 import com.yofish.netmodule.callback.BaseCallBack;
-import com.yofish.netmodule.callback.ProgressCallBack;
 
 import java.io.File;
 import java.io.IOException;
@@ -146,8 +145,8 @@ public class NetWorkActivity extends BaseActivity implements View.OnClickListene
             File file2 = Utility.saveFile(inputStream2, "pic2.png");
             Map<String, Object> params = new HashMap<>();
             params.put("username", "huach");
-            new NetClient.Builder(this).baseUrl("http://credit.youyuwo.com/control/user/").method("uploadIconNew.go")
-                    .addFile(file).addFile(file2).params(params).callBack(new ProgressCallBack() {
+            NetClient.newBuilder(this).baseUrl("http://credit.youyuwo.com/control/user/").method("uploadIconNew.go")
+                    .addFile(file).addFile(file2).params(params).callBack(new BaseCallBack() {
                         @Override
                         public void onSuccess(Object o) {
                             Toast.makeText(NetWorkActivity.this, "success", Toast.LENGTH_SHORT).show();
