@@ -67,9 +67,10 @@ dependencies {
     api "io.reactivex.rxjava2:rxjava:2.2.4"
     //eventbus
     implementation 'org.greenrobot:eventbus:3.1.1'
+    api 'com.hch.open:pictureSelector:1.0.1'
 
 //    api project(':netmodule')
-    api 'com.yofish.mall:netmodule:1.0.2'
+    api 'com.yofish.mall:netmodule:1.0.3'
     api 'com.yofish.mall:imagemodule:1.0.0'
 //    api project(':imagemodule')
 }
@@ -85,7 +86,7 @@ uploadArchives {
             repository(url: "http://10.0.52.88:8081/repository/yofish-mail-release/") {
                 authentication(userName: "admin", password: "admin123")
             }
-            pom.version = "1.0.6"
+            pom.version = "1.0.7"
             pom.artifactId = "basekit"
             pom.groupId = "com.yofish.mall"
             pom.packaging = 'aar'

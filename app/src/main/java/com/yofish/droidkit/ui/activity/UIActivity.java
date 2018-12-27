@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckedTextView;
 
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureMimeType;
 import com.yofish.imagemodule.ImgLoader;
 import com.yofish.kitmodule.baseAdapter.abslistview.CommonAdapter;
 import com.yofish.kitmodule.baseAdapter.abslistview.ViewHolder;
@@ -172,8 +174,21 @@ public class UIActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(new Intent(this, RecyclerViewActivity.class));
                 break;
             case R.id.pagersliding:
-                startActivity(new Intent(this, PagerSlidingActivity.class));
+//                startActivity(new Intent(this, PagerSlidingActivity.class));
+                PictureSelector.create(this)
+                        .openGallery(PictureMimeType.ofImage())
+                        .theme(R.style.picture_default_style)
+                        .maxSelectNum(1)
+                        .previewImage(true)
+                        .hideBottomControls(true)
+                        .isCamera(false)
+                        .enableCrop(true)
+                        .withAspectRatio(1,1)
+                        .compress(true)
+                        .compressQuality(30)
+                        .forResult(100);
                 break;
+
         }
     }
 }
