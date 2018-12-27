@@ -79,6 +79,7 @@
         <attr format="string" name="ptr_header_shimmer_text"/>
         <attr format="color" name="ptr_header_shimmer_text_color"/>
         <attr format="string" name="ptr_header_shimmer_points_array"/>
+        <attr format="boolean" name="ptr_autorefresh"/>
     </declare-styleable>
 
 

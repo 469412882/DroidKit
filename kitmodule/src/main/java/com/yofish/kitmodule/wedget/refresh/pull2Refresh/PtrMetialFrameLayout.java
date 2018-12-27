@@ -17,6 +17,8 @@ public class PtrMetialFrameLayout extends PtrFrameLayout
     //刷新时保持头部
     private boolean keepHeader = false;
 
+    private boolean autoRefresh = true;
+
     public PtrMetialFrameLayout(Context paramContext)
     {
         this(paramContext, null, 0);
@@ -33,6 +35,7 @@ public class PtrMetialFrameLayout extends PtrFrameLayout
         TypedArray localTypedArray = paramContext.obtainStyledAttributes(paramAttributeSet, R.styleable.PtrFrameLayout, 0, 0);
         if (null != paramAttributeSet) {
             keepHeader = localTypedArray.getBoolean(R.styleable.PtrFrameLayout_ptr_keep_header_float_content, keepHeader);
+            autoRefresh = localTypedArray.getBoolean(R.styleable.PtrFrameLayout_ptr_autorefresh, autoRefresh);
         }
         initHeader();
     }
@@ -44,8 +47,10 @@ public class PtrMetialFrameLayout extends PtrFrameLayout
         setPinContent(keepHeader);
         setHeaderView(materialHeader);
         addPtrUIHandler(materialHeader);
+        if (autoRefresh){
+            initAutoRefresh();
+        }
 
-        initAutoRefresh();
     }
 
     private void initAutoRefresh() {

@@ -92,6 +92,9 @@ public class RefreshContainer extends PtrMetialFrameLayout {
         return mLoadMoreUtils;
     }
 
+    /**
+     * 设置下拉刷新响应
+     */
     public void setAutoRefreshing() {
         setPtrHandler(new PtrHandler() {
 
