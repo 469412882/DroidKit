@@ -247,8 +247,8 @@ public class CommonBindingAdapter {
      * @param refreshContainer
      * @param onRefreshCommand
      */
-    @BindingAdapter(value = {"onRefreshCommand"}, requireAll = false)
-    public static void onRefresh(RefreshContainer refreshContainer, final BindingCommand onRefreshCommand) {
+    @BindingAdapter(value = {"onRefreshCommand","noAutoRefresh"}, requireAll = false)
+    public static void onRefresh(RefreshContainer refreshContainer, final BindingCommand onRefreshCommand,boolean noAutoRefresh) {
         refreshContainer.setAutoRefreshing();
         refreshContainer.setOnRefreshListener(new RefreshContainer.OnRefreshListener() {
             @Override

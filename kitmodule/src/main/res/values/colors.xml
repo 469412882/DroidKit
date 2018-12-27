@@ -55,4 +55,6 @@
     <!-- 页面背景色 color -->
     <color name="colorCommonBg">#f9f9f9</color>
 
+    <!--图片加载中颜色-->
+    <color name="colorImgHolder">#f0f0f0</color>
 </resources>

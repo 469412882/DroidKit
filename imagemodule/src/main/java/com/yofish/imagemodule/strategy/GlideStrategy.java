@@ -50,7 +50,7 @@ public class GlideStrategy extends BaseImgLoaderStrategy {
          * 设置加载错误图
          */
         if (options.getError() != 0) {
-            requestOptions.placeholder(options.getError());
+            requestOptions.error(options.getError());
         }
 
         BitmapTransformation transformation = null;
