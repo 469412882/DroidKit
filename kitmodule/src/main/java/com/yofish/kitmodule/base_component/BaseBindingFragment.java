@@ -91,6 +91,12 @@ public abstract class BaseBindingFragment<V extends ViewDataBinding, VM extends 
                 showSnackBar(s, getActivity().getWindow().getDecorView());
             }
         });
+        viewModel.getUiLiveData().getToastEvent().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                showToast(s);
+            }
+        });
         //页数更新
         viewModel.getUiLiveData().getUpdatePageEvent().observe(this, new Observer<PagerInfo>() {
             @Override

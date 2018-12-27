@@ -11,12 +11,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckedTextView;
 
+import com.yofish.imagemodule.ImgLoader;
 import com.yofish.kitmodule.baseAdapter.abslistview.CommonAdapter;
 import com.yofish.kitmodule.baseAdapter.abslistview.ViewHolder;
 import com.yofish.kitmodule.base_component.BaseActivity;
 import com.yofish.kitmodule.util.Utility;
 import com.yofish.kitmodule.wedget.BottomSheetDialog;
 import com.yofish.droidkit.R;
+import com.yofish.kitmodule.wedget.ImageViewWithBorder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,6 +69,13 @@ public class UIActivity extends BaseActivity implements View.OnClickListener {
                 checkedTextView.setChecked(!checkedTextView.isChecked());
             }
         });
+
+        ImageViewWithBorder img1 = findViewById(R.id.img1);
+        ImageViewWithBorder img2 = findViewById(R.id.img2);
+        ImageViewWithBorder img3 = findViewById(R.id.img3);
+        ImgLoader.getInstance().load("http://cdn.duitang.com/uploads/item/201408/28/20140828142218_PS4fi.thumb.700_0.png",img1);
+        ImgLoader.getInstance().load("http://cdn.duitang.com/uploads/item/201408/28/20140828142218_PS4fi.thumb.700_0.png",img2);
+        ImgLoader.getInstance().load("http://cdn.duitang.com/uploads/item/201408/28/20140828142218_PS4fi.thumb.700_0.png",img3);
     }
 
     @Override

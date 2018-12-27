@@ -51,5 +51,8 @@
 
     <color name="colorTextTitle">#333333</color>
     <color name="colorTextContent">#999999</color>
+    <color name="colorTextDarkGray">#666666</color>
+    <!-- 页面背景色 color -->
+    <color name="colorCommonBg">#f9f9f9</color>
 
 </resources>

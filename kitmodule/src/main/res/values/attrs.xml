@@ -33,10 +33,10 @@
         <attr name="borderRadius" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ImageViewWithBorder">
-        <attr name="image_shape" format="enum">
-            <enum name="rect" value="0" />
-            <enum name="circle" value="1" />
-        </attr>
+        <attr name="circle" format="boolean"/>
+        <attr name="border" format="boolean"/>
+        <attr name="border_width" format="dimension"/>
+        <attr name="border_color" format="color" />
     </declare-styleable>
     <declare-styleable name="CirclePercentView">
         <attr name="arc_width" format="dimension" />

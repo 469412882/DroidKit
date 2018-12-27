@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.widget.TextView;
 
 import com.yofish.kitmodule.base_component.BaseApp;
 import com.yofish.kitmodule.router.CommonRouter;
@@ -161,6 +162,27 @@ public class AppLoginMgr {
      */
     public String getUserPhoneNum() {
         return this.sp.getString("VERIFYUSER_PHONENUM_KEY", "");
+    }
+
+    /**
+     * 获取用户手机号掩码
+     *
+     * @return String
+     */
+    public String getMaskUserPhoneNum() {
+        StringBuilder mask = new StringBuilder();
+        String phone = this.sp.getString("VERIFYUSER_PHONENUM_KEY", "");
+        if (!TextUtils.isEmpty(phone)) {
+            char[] array = phone.toCharArray();
+            for (int i = 0; i < array.length; i++) {
+                if (i >= 3 && i <= 6) {
+                    mask.append("*");
+                } else {
+                    mask.append(array[i]);
+                }
+            }
+        }
+        return mask.toString();
     }
 
     /**

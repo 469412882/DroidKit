@@ -1,127 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <include layout="@layout/droidkit_toolbar" />
-
+    android:layout_height="match_parent">
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.yofish.kitmodule.wedget.CheckBox
+        <include layout="@layout/droidkit_toolbar" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary" />
+            android:gravity="center_vertical">
 
-        <CheckedTextView
-            android:id="@+id/checkedTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?android:attr/textColorAlertDialogListItem"
-            android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
-            android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
-            android:layout_marginLeft="30dp"
+            <com.yofish.kitmodule.wedget.CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary" />
+
+            <CheckedTextView
+                android:id="@+id/checkedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorAlertDialogListItem"
+                android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+                android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
+                android:layout_marginLeft="30dp"
+                android:gravity="center"
+                android:text="android原生CheckedTextView"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin"
+                android:text="普通dialog" />
+
+            <Button
+                android:id="@+id/dialog2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin"
+                android:text="单选dialog" />
+
+            <Button
+                android:id="@+id/dialog3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin"
+                android:text="列表dialog" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/bottom_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin"
+                android:text="底部列表dialog" />
+
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/elevation_view"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:clickable="true"
+            android:elevation="1dp"
+            android:layout_margin="@dimen/common_margin"
+            android:background="@color/colorDivider"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/listview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin"
+                android:text="listview" />
+
+            <Button
+                android:id="@+id/recyclerview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="@dimen/common_margin"
+                android:text="recyclerview" />
+
+            <Button
+                android:id="@+id/pagersliding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="@dimen/common_margin"
+                android:text="PagerSlid" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="登录"
             android:gravity="center"
-            android:text="android原生CheckedTextView"/>
+            android:background="@drawable/common_btn_bg_solid"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="@dimen/common_margin"
+            android:layout_marginRight="@dimen/common_margin"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.yofish.kitmodule.wedget.ImageViewWithBorder
+                android:id="@+id/img1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="@dimen/common_margin"
+                app:circle="true"
+                app:border="true"
+                app:border_color="@color/colorPrimary"
+                app:border_width="1dp"/>
+
+            <com.yofish.kitmodule.wedget.ImageViewWithBorder
+                android:id="@+id/img2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="@dimen/common_margin"
+                app:border="true"
+                app:border_color="@color/colorPrimary"
+                app:border_width="1dp"/>
+
+            <com.yofish.kitmodule.wedget.ImageViewWithBorder
+                android:id="@+id/img3"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="@dimen/common_margin"/>
+
+            <com.yofish.kitmodule.wedget.ImageViewWithBorder
+                android:id="@+id/img4"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="@dimen/common_margin"
+                android:src="@mipmap/ic_launcher"
+                app:circle="true"
+                app:border="true"
+                app:border_color="@color/colorPrimary"
+                app:border_width="1dp"/>
+
+
+        </LinearLayout>
 
     </LinearLayout>
+</ScrollView>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/dialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin"
-            android:text="普通dialog" />
-
-        <Button
-            android:id="@+id/dialog2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin"
-            android:text="单选dialog" />
-
-        <Button
-            android:id="@+id/dialog3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin"
-            android:text="列表dialog" />
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/bottom_dialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin"
-            android:text="底部列表dialog" />
-
-
-    </LinearLayout>
-
-    <View
-        android:id="@+id/elevation_view"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:clickable="true"
-        android:elevation="1dp"
-        android:layout_margin="@dimen/common_margin"
-        android:background="@color/colorDivider"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/listview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin"
-            android:text="listview" />
-
-        <Button
-            android:id="@+id/recyclerview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="@dimen/common_margin"
-            android:text="recyclerview" />
-
-        <Button
-            android:id="@+id/pagersliding"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="@dimen/common_margin"
-            android:text="PagerSlid" />
-
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/login_btn"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:text="登录"
-        android:gravity="center"
-        android:background="@drawable/common_btn_bg_solid"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="@dimen/common_margin"
-        android:layout_marginRight="@dimen/common_margin"/>
-
-</LinearLayout>

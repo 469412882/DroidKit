@@ -101,6 +101,13 @@ public abstract class BaseBindingActivity<V extends ViewDataBinding, VM extends 
                 showSnackBar(s, getWindow().getDecorView());
             }
         });
+        //toast显示
+        viewModel.getUiLiveData().getToastEvent().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                showToast(s);
+            }
+        });
         //snackBar显示
         viewModel.getUiLiveData().getToolBarTitleEvent().observe(this, new Observer<String>() {
             @Override

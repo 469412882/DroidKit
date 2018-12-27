@@ -77,6 +77,17 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseVie
         }
         uiLiveData.snackBarEvent.postValue(title);
     }
+    /**
+     * 显示toast，逻辑同上
+     *
+     * @param title
+     */
+    public void showToast(String title) {
+        if (uiLiveData == null) {
+            return;
+        }
+        uiLiveData.toastEvent.postValue(title);
+    }
 
     /**
      * 修改toolbar的title
@@ -207,6 +218,10 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseVie
          */
         private SingleLiveEvent<String> snackBarEvent;
         /**
+         * 显示toast
+         */
+        private SingleLiveEvent<String> toastEvent;
+        /**
          * 更新分页的页数
          */
         private SingleLiveEvent<PagerInfo> updatePageEvent;
@@ -237,6 +252,10 @@ public abstract class BaseViewModel extends AndroidViewModel implements IBaseVie
 
         public SingleLiveEvent<String> getSnackBarEvent() {
             return snackBarEvent = createLiveData(snackBarEvent);
+        }
+
+        public SingleLiveEvent<String> getToastEvent() {
+            return toastEvent = createLiveData(toastEvent);
         }
 
         public SingleLiveEvent<String> getToolBarTitleEvent() {
