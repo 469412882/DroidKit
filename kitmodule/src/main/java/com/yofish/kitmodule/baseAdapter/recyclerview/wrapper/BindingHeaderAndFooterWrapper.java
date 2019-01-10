@@ -13,8 +13,9 @@ import com.yofish.kitmodule.baseAdapter.recyclerview.utils.WrapperUtils;
 
 public class BindingHeaderAndFooterWrapper
         extends RecyclerView.Adapter<DBViewHolder> {
+
     private SparseArrayCompat<ViewDataBinding> headerbindings = new SparseArrayCompat();
-    private SparseArrayCompat<ViewDataBinding> footbindings = new SparseArrayCompat();
+    private SparseArrayCompat<ViewDataBinding> footerbindings = new SparseArrayCompat();
     private DBRvAdapter dbRvAdapter;
 
     public BindingHeaderAndFooterWrapper(DBRvAdapter paramDBRCBaseAdapter) {
@@ -27,8 +28,8 @@ public class BindingHeaderAndFooterWrapper
             localDBViewHolder = new DBViewHolder(((ViewDataBinding) headerbindings.get(paramInt)).getRoot());
             return localDBViewHolder;
         }
-        if (footbindings.get(paramInt) != null) {
-            localDBViewHolder = new DBViewHolder(((ViewDataBinding) footbindings.get(paramInt)).getRoot());
+        if (footerbindings.get(paramInt) != null) {
+            localDBViewHolder = new DBViewHolder(((ViewDataBinding) footerbindings.get(paramInt)).getRoot());
             return localDBViewHolder;
         }
         return dbRvAdapter.onCreateViewHolder(paramViewGroup, paramInt);
@@ -39,7 +40,7 @@ public class BindingHeaderAndFooterWrapper
             return headerbindings.keyAt(paramInt);
         }
         if (b(paramInt)) {
-            return footbindings.keyAt(paramInt - getHeadersCount() - a());
+            return footerbindings.keyAt(paramInt - getHeadersCount() - a());
         }
         return dbRvAdapter.getItemViewType(paramInt - getHeadersCount());
     }
@@ -68,7 +69,7 @@ public class BindingHeaderAndFooterWrapper
                 int i = getItemViewType(paramAnonymousInt);
                 if (headerbindings.get(i) != null) {
                     return paramAnonymousGridLayoutManager.getSpanCount();
-                } else if (footbindings.get(i) != null) {
+                } else if (footerbindings.get(i) != null) {
                     return paramAnonymousGridLayoutManager.getSpanCount();
                 } else {
                     return paramAnonymousSpanSizeLookup != null ? paramAnonymousSpanSizeLookup.getSpanSize(paramAnonymousInt) : 1;
@@ -98,7 +99,7 @@ public class BindingHeaderAndFooterWrapper
     }
 
     public void addFootView(ViewDataBinding paramViewDataBinding) {
-        footbindings.put(footbindings.size() + 200000, paramViewDataBinding);
+        footerbindings.put(footerbindings.size() + 200000, paramViewDataBinding);
     }
 
     public int getHeadersCount() {
@@ -106,6 +107,6 @@ public class BindingHeaderAndFooterWrapper
     }
 
     public int getFootersCount() {
-        return footbindings.size();
+        return footerbindings.size();
     }
 }
