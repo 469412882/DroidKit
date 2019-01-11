@@ -174,8 +174,8 @@ public class UIActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(new Intent(this, RecyclerViewActivity.class));
                 break;
             case R.id.pagersliding:
-//                startActivity(new Intent(this, PagerSlidingActivity.class));
-                PictureSelector.create(this)
+                startActivity(new Intent(this, PagerSlidingActivity.class));
+                /*PictureSelector.create(this)
                         .openGallery(PictureMimeType.ofImage())
                         .theme(R.style.picture_default_style)
                         .maxSelectNum(1)
@@ -186,7 +186,7 @@ public class UIActivity extends BaseActivity implements View.OnClickListener {
                         .withAspectRatio(1,1)
                         .compress(true)
                         .compressQuality(30)
-                        .forResult(100);
+                        .forResult(100);*/
                 break;
 
         }

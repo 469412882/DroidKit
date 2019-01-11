@@ -5,7 +5,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
-
+/**
+ * 使用参考 https://github.com/hackware1993/MagicIndicator
+ */
 public class PagerSlidingIndicator extends FrameLayout {
     private IPagerNavigator mNavigator;
 

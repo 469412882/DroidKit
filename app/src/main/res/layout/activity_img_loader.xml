@@ -6,85 +6,112 @@
 
     <include layout="@layout/droidkit_toolbar" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/load_img"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:text="加载图片" />
-
-        <TextView
-            android:id="@+id/cache_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp" />
-
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/img"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
-
-        <TextView
-            android:id="@+id/protxt"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="#FFF"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:visibility="invisible"
-            />
+            android:orientation="vertical">
 
-    </FrameLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/load_img"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:text="加载图片" />
+
+                <TextView
+                    android:id="@+id/cache_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/img"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+                <TextView
+                    android:id="@+id/protxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:visibility="invisible"
+                    />
+
+            </FrameLayout>
 
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/load_gif"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:text="加载gif图片" />
+                <Button
+                    android:id="@+id/load_gif"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:text="加载gif图片" />
 
-        <Button
-            android:id="@+id/clear_cache"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:text="清除本地缓存" />
+                <Button
+                    android:id="@+id/clear_cache"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="清除本地缓存" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <ImageView
-        android:id="@+id/gif"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/gif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/load_list"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:text="加载列表图片" />
+            <Button
+                android:id="@+id/load_list"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:text="加载列表图片" />
 
 
-    <GridView
-        android:id="@+id/gallery"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@color/colorPrimary"
-        android:dividerHeight="1px"
-        android:numColumns="3" />
+            <GridView
+                android:id="@+id/gallery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/colorPrimary"
+                android:dividerHeight="1px"
+                android:numColumns="3" />
+
+            <Button
+                android:id="@+id/load_big"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:text="加载长图" />
+
+            <com.yofish.kitmodule.wedget.MatchWidthImageView
+                android:id="@+id/big_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="100dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
 
 </LinearLayout>

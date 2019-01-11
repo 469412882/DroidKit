@@ -15,6 +15,8 @@ public interface IImgLoaderStrategy {
 
     void loadImg(ImgOptions options);
 
+    void loadBigImg(ImgOptions options);
+
     void loadImgWithPlaceHolder(ImgOptions options);
 
     void loadRoundImg(ImgOptions options);

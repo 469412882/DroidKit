@@ -59,6 +59,10 @@ public class ImgOptions {
      */
     private int radius;
     /**
+     * 是否是大图
+     */
+    private boolean bigImg;
+    /**
      * 图片样式
      */
     private ImgType type;
@@ -204,6 +208,14 @@ public class ImgOptions {
 
     public void setRequestOptions(RequestOptions requestOptions) {
         this.requestOptions = requestOptions;
+    }
+
+    public boolean isBigImg() {
+        return bigImg;
+    }
+
+    public void setBigImg(boolean bigImg) {
+        this.bigImg = bigImg;
     }
 
     public ImgLoaderListener getListener() {

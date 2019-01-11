@@ -13,7 +13,9 @@ import com.alibaba.fastjson.JSON;
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.yofish.droidkit.R;
+import com.yofish.droidkit.repository.bean.OrderInfo;
 import com.yofish.droidkit.repository.bean.PayResult;
+import com.yofish.droidkit.repository.bean.PrePayInfoBean;
 import com.yofish.kitmodule.base_component.BaseActivity;
 import com.yofish.kitmodule.util.LogUtils;
 import com.yofish.kitmodule.util.NetClient;
@@ -69,7 +71,7 @@ public class AlipayActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
+//        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
         super.onCreate(savedInstanceState);
         initToolbar("支付测试");
     }
@@ -94,29 +96,57 @@ public class AlipayActivity extends BaseActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.do_pay:
-                Map<String, Object> params = new HashMap<>();
-                NetClient.newBuilder(this)
-                        .baseUrl("http://pqq.vipgz1.idcfengye.com/payment/")
-                        .method("pay")
-                        .params(params)
-                        .callBack(new BaseCallBack<AllJsonObject>() {
-                            @Override
-                            public void onSuccess(AllJsonObject result) {
-                                String orderInfo = result.getResponseBodyJson().getString("data");
-                                if (TextUtils.isEmpty(orderInfo)) {
-                                    mPayResult.setText("调用后台订单返回data为空");
-                                    return;
-                                }
-                                doPay(orderInfo);
-                            }
-
-                            @Override
-                            public void onFailed(String code, String errors) {
-                                mPayResult.setText(errors);
-                            }
-                        }).sendPost();
+//                getTestOrder();
+                getAlipayOrder("");
                 break;
         }
+    }
+
+    private void getTestOrder() {
+        NetClient.newBuilder(this)
+                .baseUrl("http://pqq.vipgz1.idcfengye.com/order/")
+                .method("createDemo")
+                .callBack(new BaseCallBack<OrderInfo>() {
+                    @Override
+                    public void onSuccess(OrderInfo result) {
+                        if (result == null || TextUtils.isEmpty(result.getOrderId())) {
+                            mPayResult.setText("调用后台订单返回data为空");
+                            return;
+                        }
+                        getAlipayOrder(result.getOrderId());
+                    }
+
+                    @Override
+                    public void onFailed(String code, String errors) {
+                        mPayResult.setText(errors);
+                    }
+                }).sendPost();
+    }
+
+    private void getAlipayOrder(String orderId) {
+        Map<String, Object> params = new HashMap<>();
+//        params.put("orderId", orderId);
+//        params.put("payType", "2");
+        NetClient.newBuilder(this)
+                .baseUrl("http://pqq.vipgz1.idcfengye.com/payment/")
+                .method("pay")
+                .params(params)
+                .callBack(new BaseCallBack<AllJsonObject>() {
+                    @Override
+                    public void onSuccess(AllJsonObject result) {
+                        String orderInfo = result.getResponseBodyJson().getString("data");
+                        if (TextUtils.isEmpty(orderInfo)) {
+                            mPayResult.setText("调用后台订单返回data为空");
+                            return;
+                        }
+                        doPay(orderInfo);
+                    }
+
+                    @Override
+                    public void onFailed(String code, String errors) {
+                        mPayResult.setText(errors);
+                    }
+                }).sendPost();
     }
 
     private void doPay(final String orderInfo) {
@@ -127,7 +157,7 @@ public class AlipayActivity extends BaseActivity implements View.OnClickListener
             public void run() {
                 PayTask alipay = new PayTask(AlipayActivity.this);
                 Map<String, String> result = alipay.payV2(orderInfo, true);
-                LogUtils.i( result.toString());
+                LogUtils.i(result.toString());
 
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
@@ -141,10 +171,10 @@ public class AlipayActivity extends BaseActivity implements View.OnClickListener
         payThread.start();
     }
 
-    private void doSync(PayResult payResult){
+    private void doSync(PayResult payResult) {
         NetClient.newBuilder(this)
-                .baseUrl("http://pqq.vipgz1.idcfengye.com/payment/")
-                .method("rece")
+                .baseUrl("http://pqq.vipgz1.idcfengye.com/payment/alipay/")
+                .method("notify")
                 .params(payResult)
                 .callBack(new BaseCallBack<AllJsonObject>() {
                     @Override

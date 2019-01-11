@@ -75,6 +75,16 @@ public class ImgLoader {
     }
 
     /**
+     * 加载图片
+     *
+     * @param options
+     *            options
+     */
+    public void loadBigImg(ImgOptions options) {
+        ImgLoaderDelegate.getInstance().getLoader().loadBigImg(options);
+    }
+
+    /**
      * 加载图片 带有进度回调
      * @param url
      * @param imageView
@@ -189,6 +199,11 @@ public class ImgLoader {
             return this;
         }
 
+        public Builder bigImg(boolean big) {
+            options.setBigImg(big);
+            return this;
+        }
+
         public Builder bitmapTransformation(BitmapTransformation bitmapTransformation) {
             options.setBitmapTransformation(bitmapTransformation);
             return this;
@@ -231,7 +246,11 @@ public class ImgLoader {
 
         public void into(ImageView imageView) {
             options.setImageView(imageView);
-            getInstance().load(options);
+            if (options.isBigImg()) {
+                getInstance().loadBigImg(options);
+            } else {
+                getInstance().load(options);
+            }
         }
 
         public void intoWithListener(ImageView imageView) {

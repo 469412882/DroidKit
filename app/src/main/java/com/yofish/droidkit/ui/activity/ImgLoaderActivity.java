@@ -1,17 +1,28 @@
 package com.yofish.droidkit.ui.activity;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.yofish.kitmodule.baseAdapter.abslistview.CommonAdapter;
-import com.yofish.kitmodule.baseAdapter.abslistview.ViewHolder;
-import com.yofish.kitmodule.base_component.BaseActivity;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.yofish.droidkit.R;
 import com.yofish.imagemodule.ImgLoader;
 import com.yofish.imagemodule.ImgOptions;
+import com.yofish.kitmodule.baseAdapter.abslistview.CommonAdapter;
+import com.yofish.kitmodule.baseAdapter.abslistview.ViewHolder;
+import com.yofish.kitmodule.base_component.BaseActivity;
+import com.yofish.kitmodule.util.CommonBindingAdapter;
+import com.yofish.kitmodule.wedget.MatchWidthImageView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +31,7 @@ public class ImgLoaderActivity extends BaseActivity implements View.OnClickListe
 
     private ImageView img;
     private ImageView gif;
+    private MatchWidthImageView bigImg;
     private TextView cacheView;
     private CommonAdapter<String> mAdapter;
     private GridView gridView;
@@ -42,8 +54,10 @@ public class ImgLoaderActivity extends BaseActivity implements View.OnClickListe
         findViewById(R.id.load_gif).setOnClickListener(this);
         findViewById(R.id.load_list).setOnClickListener(this);
         findViewById(R.id.clear_cache).setOnClickListener(this);
+        findViewById(R.id.load_big).setOnClickListener(this);
         img = (ImageView) findViewById(R.id.img);
         gif = (ImageView) findViewById(R.id.gif);
+        bigImg = (MatchWidthImageView) findViewById(R.id.big_img);
         cacheView = (TextView) findViewById(R.id.cache_size);
         cacheView.setText("缓存大小：" + ImgLoader.getInstance().getCacheSize(this));
         gridView = (GridView) findViewById(R.id.gallery);
@@ -87,6 +101,19 @@ public class ImgLoaderActivity extends BaseActivity implements View.OnClickListe
             case R.id.clear_cache:
                 ImgLoader.getInstance().clearImgDiskCache(this);
                 cacheView.setText("缓存大小：" + ImgLoader.getInstance().getCacheSize(this));
+                break;
+            case R.id.load_big:
+                CommonBindingAdapter.loadBigNetImg(bigImg, "http://yanxuan.nosdn.127.net/968507ae6e2b30c18578b79322b01fe2.jpg");
+//                Glide.with(this).asBitmap()
+//                        .load("http://yanxuan.nosdn.127.net/968507ae6e2b30c18578b79322b01fe2.jpg")
+//                        .into(new SimpleTarget<Bitmap>() {
+//                            @Override
+//                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+////                                Uri uri = Uri.fromFile(resource);
+////                                bigImg.setImageURI(uri);
+//                                bigImg.setImageBitmap(resource);
+//                            }
+//                        });
                 break;
         }
     }

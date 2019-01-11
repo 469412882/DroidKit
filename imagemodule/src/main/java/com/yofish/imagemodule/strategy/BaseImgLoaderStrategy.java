@@ -29,6 +29,11 @@ public abstract class BaseImgLoaderStrategy implements IImgLoaderStrategy {
     }
 
     @Override
+    public void loadBigImg(ImgOptions options) {
+
+    }
+
+    @Override
     public void loadRoundImg(ImgOptions options) {
 
     }

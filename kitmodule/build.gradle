@@ -47,12 +47,12 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation "com.android.support:appcompat-v7:${cfgs.SUPPORT_LIB_VERSION}"
+    api "com.android.support:appcompat-v7:${cfgs.SUPPORT_LIB_VERSION}"
     testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support:multidex:1.0.3'
-    implementation "com.android.support:design:${cfgs.SUPPORT_LIB_VERSION}"
+    api 'com.android.support:multidex:1.0.3'
+    api "com.android.support:design:${cfgs.SUPPORT_LIB_VERSION}"
     //json
-    implementation "com.android.support:recyclerview-v7:${cfgs.SUPPORT_LIB_VERSION}"
+    api "com.android.support:recyclerview-v7:${cfgs.SUPPORT_LIB_VERSION}"
     implementation 'com.nineoldandroids:library:2.4.0'
     /* router */
     implementation("com.alibaba:arouter-api:${cfgs.arouter_api_version}"){
@@ -71,7 +71,7 @@ dependencies {
 
 //    api project(':netmodule')
     api 'com.yofish.mall:netmodule:1.0.3'
-    api 'com.yofish.mall:imagemodule:1.0.0'
+    api 'com.yofish.mall:imagemodule:1.0.2'
 //    api project(':imagemodule')
 }
 
@@ -86,7 +86,7 @@ uploadArchives {
             repository(url: "http://10.0.52.88:8081/repository/yofish-mail-release/") {
                 authentication(userName: "admin", password: "admin123")
             }
-            pom.version = "1.0.7"
+            pom.version = "1.1.1"
             pom.artifactId = "basekit"
             pom.groupId = "com.yofish.mall"
             pom.packaging = 'aar'

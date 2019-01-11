@@ -35,6 +35,7 @@ import com.yofish.kitmodule.R;
 import com.yofish.kitmodule.baseAdapter.abslistview.DBLvAdapter;
 import com.yofish.kitmodule.baseAdapter.recyclerview.CommonAdapter;
 import com.yofish.kitmodule.baseAdapter.recyclerview.DBRvAdapter;
+import com.yofish.kitmodule.baseAdapter.recyclerview.wrapper.BindingHeaderAndFooterWrapper;
 import com.yofish.kitmodule.binding.command.BindingCommand;
 import com.yofish.kitmodule.wedget.refresh.RefreshContainer;
 import com.yofish.kitmodule.wedget.viewpager.DBPagerAdapter;
@@ -240,6 +241,16 @@ public class CommonBindingAdapter {
                 }).intoWithListener(imageView);
             }
         }
+    }
+
+    @BindingAdapter(value = {"bindBigNetImg"}, requireAll = false)
+    public static void loadBigNetImg(ImageView imageView, String url) {
+        new ImgLoader.Builder()
+                .url(url)
+                .placeHolder(R.drawable.netimg_big_img_placeholder)
+                .error(R.drawable.netimg_default_rect_shape)
+                .bigImg(true)
+                .into(imageView);
     }
 
     /**
@@ -518,6 +529,17 @@ public class CommonBindingAdapter {
      */
     @BindingAdapter({"bindAdapter"})
     public static void setRecyclerViewAdapter(RecyclerView recyclerView, DBRvAdapter adapter) {
+        recyclerView.setAdapter(adapter);
+    }
+
+    /**
+     * RecyclerView 数据绑定可加头尾的adapter
+     *
+     * @param recyclerView
+     * @param adapter
+     */
+    @BindingAdapter({"bindAdapter"})
+    public static void setRecyclerViewAdapter(RecyclerView recyclerView, BindingHeaderAndFooterWrapper adapter) {
         recyclerView.setAdapter(adapter);
     }
 

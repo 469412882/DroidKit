@@ -1,19 +1,24 @@
 package com.yofish.imagemodule.strategy;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.yofish.imagemodule.ImgOptions;
 import com.yofish.imagemodule.okhttpmodule.OnProgressListener;
 import com.yofish.imagemodule.okhttpmodule.ProgressManager;
@@ -95,13 +100,7 @@ public class GlideStrategy extends BaseImgLoaderStrategy {
 
     @Override
     public void loadImg(ImgOptions options) {
-        RequestOptions requestOptions = null;
-        if (options.getRequestOptions() != null) {
-            requestOptions = options.getRequestOptions();
-        }else {
-            resetOptions(options);
-            requestOptions = this.requestOptions;
-        }
+        RequestOptions requestOptions = genrateRequestOptions(options);
 
         RequestManager with = Glide.with(options.getImageView().getContext());
         RequestBuilder<Drawable> load = with.load(options.getUrl());
@@ -134,6 +133,32 @@ public class GlideStrategy extends BaseImgLoaderStrategy {
             }
         }
         load.apply(requestOptions).into(options.getImageView());
+    }
+
+    @Override
+    public void loadBigImg(final ImgOptions options) {
+        final RequestOptions requestOptions =genrateRequestOptions(options);
+        Glide.with(options.getImageView().getContext()).asBitmap()
+                .load(options.getUrl())
+                .apply(requestOptions)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        options.getImageView().setImageBitmap(resource);
+                    }
+
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        options.getImageView().setImageResource(requestOptions.getPlaceholderId());
+                    }
+
+                    @Override
+                    public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                        super.onLoadFailed(errorDrawable);
+                        options.getImageView().setImageResource(requestOptions.getErrorId());
+                    }
+                });
     }
 
     @Override
@@ -218,5 +243,22 @@ public class GlideStrategy extends BaseImgLoaderStrategy {
             e.printStackTrace();
         }
         return "0B";
+    }
+
+    private RequestOptions genrateRequestOptions(ImgOptions options){
+        RequestOptions requestOptions = null;
+        if (options.getRequestOptions() != null) {
+            requestOptions = options.getRequestOptions();
+        }else {
+            resetOptions(options);
+            requestOptions = this.requestOptions;
+        }
+        if (options.getPlaceHolder() > 0) {
+            requestOptions.placeholder(options.getPlaceHolder());
+        }
+        if (options.getError() > 0) {
+            requestOptions.error(options.getError());
+        }
+        return requestOptions;
     }
 }
