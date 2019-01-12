@@ -57,12 +57,13 @@ public class PtrMetialFrameLayout extends PtrFrameLayout
         /**
          * 设置自动刷新头部
          */
-        postDelayed(new Runnable() {
+        /*postDelayed(new Runnable() {
             @Override
             public void run() {
                 autoRefresh(true);
             }
-        },100);
+        },100);*/
+        autoRefresh(true);
     }
 
     public MaterialHeader getHeader()
