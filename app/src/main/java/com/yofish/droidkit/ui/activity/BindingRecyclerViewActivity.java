@@ -55,7 +55,7 @@ public class BindingRecyclerViewActivity extends BaseBindingActivity<ActivityRec
         binding.container.setOnLoadMoreListener(new RefreshContainer.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                viewModel.requestRepository(true);
+                viewModel.requestRepository(true,);binding.container.getLoadMoreFooterUtils().
             }
         });
     }

@@ -18,7 +18,7 @@ public class LoadMoreFooterUtils {
     /** 底部Footer */
     private View mFooterView;
     /** 总页数 */
-    private int mTotalPageNum;
+    private int mTotalPageNum = 1;
     /** 当前页数 */
     private int mCurrentPageNum;
     /** context */
@@ -72,6 +72,18 @@ public class LoadMoreFooterUtils {
             mLoadMoreStatus = LoadMoreStatus.READY;
         }
         refreshFooterView();
+    }
+
+    public int getCurrentPagerNum(){
+        return mCurrentPageNum;
+    }
+
+    public int getTotalPagerNum(){
+        return mTotalPageNum;
+    }
+
+    public int nextPagerNum(){
+        return mCurrentPageNum >= mTotalPageNum ? mTotalPageNum : mCurrentPageNum + 1;
     }
 
     public boolean canLoadMore(){

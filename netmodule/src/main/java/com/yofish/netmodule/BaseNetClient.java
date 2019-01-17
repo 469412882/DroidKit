@@ -129,6 +129,22 @@ public class BaseNetClient {
             return this;
         }
 
+        public Builder addFile(String key, File file) {
+            if (files == null) {
+                files = new HashMap<>();
+            }
+            if (TextUtils.isEmpty(key)) {
+                key = file.getName();
+            }
+            if (file == null) {
+                Toast.makeText(context, "您还没有选择文件", Toast.LENGTH_SHORT).show();
+                return this;
+            }
+            files.put(key, file);
+            config.setFiles(this.files);
+            return this;
+        }
+
         public Builder callBack(ICallBack callBack){
             this.callBack = callBack;
             config.setCallBack(this.callBack);
