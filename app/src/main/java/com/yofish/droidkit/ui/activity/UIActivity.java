@@ -20,6 +20,7 @@ import com.yofish.kitmodule.base_component.BaseActivity;
 import com.yofish.kitmodule.util.Utility;
 import com.yofish.kitmodule.wedget.BottomSheetDialog;
 import com.yofish.droidkit.R;
+import com.yofish.kitmodule.wedget.ExpandableTextView;
 import com.yofish.kitmodule.wedget.ImageViewWithBorder;
 
 import java.util.ArrayList;
@@ -78,6 +79,9 @@ public class UIActivity extends BaseActivity implements View.OnClickListener {
         ImgLoader.getInstance().load("http://cdn.duitang.com/uploads/item/201408/28/20140828142218_PS4fi.thumb.700_0.png",img1);
         ImgLoader.getInstance().load("http://cdn.duitang.com/uploads/item/201408/28/20140828142218_PS4fi.thumb.700_0.png",img2);
         ImgLoader.getInstance().load("http://cdn.duitang.com/uploads/item/201408/28/20140828142218_PS4fi.thumb.700_0.png",img3);
+
+        ExpandableTextView expandableTextView = findViewById(R.id.expand_text_view);
+        expandableTextView.setText("限感恩节活动页面商品可用；限时购、特价等特惠商品，处于新品期的商品及详情页标注不可用券的商品除外限感恩节活动页面商品可用；限时购、特价等特惠商品，处于新品期的商品及详情页标注不可用券的商品除外");
     }
 
     @Override
