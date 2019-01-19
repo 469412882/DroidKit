@@ -15,6 +15,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
+import com.yofish.imagemodule.utils.ImgUtils;
 import com.yofish.kitmodule.R;
 
 
@@ -76,7 +77,7 @@ public class ImageViewWithBorder extends android.support.v7.widget.AppCompatImag
             int mRadius = Math.min(rect.width() / 2, rect.height() / 2);
             try {
                 //初始化BitmapShader，传入bitmap对象
-                BitmapShader bitmapShader = new BitmapShader(drawable.getBitmap(), Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+                BitmapShader bitmapShader = new BitmapShader(ImgUtils.resizeBitmap(drawable.getBitmap(), rect.width(), rect.height()), Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
                 mPaint.setShader(bitmapShader);
                 //画圆形，指定好坐标，半径，画笔
                 canvas.drawCircle(rect.centerX(), rect.centerY(), mRadius, mPaint);

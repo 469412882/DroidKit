@@ -410,4 +410,26 @@ public class ImgUtils {
         }
         return picName;
     }
+
+    /**
+     * 重置bitmap宽高
+     *
+     * @param bitmap    bitmap
+     * @param newWidth  newWidth
+     * @param newHeight newHeight
+     * @return Bitmap
+     */
+    public static Bitmap resizeBitmap(Bitmap bitmap, int newWidth, int newHeight) {
+        // 获得图片的宽高.
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        // 计算缩放比例.
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // 取得想要缩放的matrix参数.
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        // 得到新的图片.
+        return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+    }
 }
